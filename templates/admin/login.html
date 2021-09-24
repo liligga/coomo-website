@@ -9,7 +9,8 @@
             <div class="card">
                 <div class="card-body">
                     <h5>Вход в административную часть</h5>
-                    <form action="" autocomplete="off">
+                    <form action="" autocomplete="off" method="post">
+                        {% csrf_token %}
                         <div class="form-group">
                             <label for="username">Имя пользователя
                                 <input type="text" class="form-control" name="username">
@@ -20,7 +21,7 @@
                                 <input type="password" class="form-control" name="password">
                             </label>
                         </div>
-                        <button type="button" id="sendlogin" class="btn btn-primary">Отправить код на email</button>
+                        <button type="submit" id="sendotp" class="btn btn-primary">Отправить код на email</button>
                     </form>
                 </div>
             </div>
