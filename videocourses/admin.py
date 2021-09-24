@@ -5,7 +5,6 @@ from .models import *
 class CourseAdmin(admin.ModelAdmin):
 	list_display = ['name', 'lang_course']
 	list_filter = ['name', 'lang_course']
-	search_fields = ['name']
 	save_as = True
 
 @admin.register(Video)

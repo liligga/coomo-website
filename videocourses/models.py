@@ -1,5 +1,6 @@
 from django.db import models
 
+
 LANGUAGE_CHOICES = [
 	('Ru', 'Русский'),
 	('Kg', 'Кыргызский'), #Слово "Кыргызский" можно поменять на "Кыргызча" по желанию
@@ -12,7 +13,7 @@ class Course(models.Model):
 	lang_course = models.CharField(default="Ru", choices=LANGUAGE_CHOICES, max_length=15)
 
 	def __str__(self):
-		return self.name
+		return self.course_name
 
 	class Meta:
 		verbose_name='Курс'
@@ -20,13 +21,13 @@ class Course(models.Model):
 
 
 class Video(models.Model):
-	course_id = models.ForeignKey(Course, on_delete = models.CASCADE)
+	course = models.ForeignKey(Course, on_delete = models.CASCADE, related_name='videos')
 	name = models.CharField(max_length=150)
 	video_link = models.URLField(max_length = 150, unique=True, blank=True)
 	lang_video = models.CharField(default='Ru', choices=LANGUAGE_CHOICES, max_length=15)
 
 	def __str__(self):
-		return self.name
+		return self.video_name
 
 	class Meta:
 		verbose_name='Видео'
