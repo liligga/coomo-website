@@ -43,6 +43,8 @@ def login_page(request):
             user_otp.save()
             send_email(user.email, username, otp)
             return redirect(reverse('check_otp', kwargs={'email': user.email}))
+        else:
+            return redirect('login_page')
 
     return render(request, 'admin/login.html')
 
@@ -54,6 +56,8 @@ def check_otp(request, email):
         user_otp = OneTimePassword.objects.get(user=user)
         if user_otp.otp == int(otp) and user.is_staff:
             login(request, user)
+            user_otp.otp = 0
+            user_otp.save()
             return redirect('/admin')
         else:
             return redirect('login_page')
