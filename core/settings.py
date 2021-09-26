@@ -36,6 +36,7 @@ ALLOWED_HOSTS = ['http://localhost:8000', 'http://localhost:3000', '127.0.0.1']
 INSTALLED_APPS = [
 
     # Apps
+    'news',
 
     # Django
     'django.contrib.admin',
