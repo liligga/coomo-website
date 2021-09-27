@@ -42,6 +42,13 @@ class TestAuthentication(TestCase):
         self.assertRedirects(response, reverse('login_page'), status_code=302,
                              target_status_code=200)
 
+    def test_login_wrong_password(self):
+        response = self.client.post(self.login_url, username=self.test_user2.username, password='654321',
+                                    format='text/html')
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse('login_page'), status_code=302,
+                             target_status_code=200)
+
     def test_otp_redirect(self):
         response = self.client.post(self.login_url, username=self.test_user.username, password='123456',
                                     format='text/html')
