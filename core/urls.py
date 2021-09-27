@@ -23,7 +23,7 @@ from django.urls import path, include
 from authentication.views import check_otp, login_page
 
 urlpatterns = [
-    path('admin/', decorator_include(login_required, admin.site.urls)),
+    path('admin/', decorator_include(login_required, admin.site.urls), name='admin'),
     path('api-auth/', include('rest_framework.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('login_page/', login_page, name='login_page'),
