@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.text import  slugify
+from ckeditor_uploader.fields import RichTextUploadingField
 
 
 
@@ -12,12 +13,12 @@ class News(models.Model):
 
 	title = models.CharField(max_length=250, verbose_name='Заголовок')
 	slug = models.SlugField(unique=True, help_text='Выберите язык')
-	text = models.TextField(verbose_name='Текст')
+	text = RichTextUploadingField(verbose_name='Текст')
 	language = models.CharField(max_length=15, choices=LANGUAGE, verbose_name='Язык')
 	author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Автор')
 	created = models.DateTimeField(auto_now_add=True, verbose_name='Создано')
 	updated = models.DateTimeField(auto_now=True, verbose_name='Обновлено')
-	image = models.ImageField(upload_to='images', blank=True, verbose_name='Картинка')
+	
 	
 
 	def __str__(self):
