@@ -11,9 +11,16 @@ class News(models.Model):
 		('kg', 'Кыргызский'),
 	]
 
+	PRIORITY = [
+	(1, 'Важные и срочные'),
+	(2, 'Важные и несрочные'),
+	(3, 'Неважные и несрочные'),
+	]
+
 	title = models.CharField(max_length=250, verbose_name='Заголовок')
 	slug = models.SlugField(unique=True, help_text='Выберите язык')
 	text = RichTextUploadingField(verbose_name='Текст')
+	impotant = models.BooleanField(default = False, verbose_name = 'Важная новость')
 	language = models.CharField(max_length=15, choices=LANGUAGE, verbose_name='Язык')
 	author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Автор')
 	created = models.DateTimeField(auto_now_add=True, verbose_name='Создано')
