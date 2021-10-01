@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}
+
+{% endblock %}
+
+{% block content %}
+    <div class="row justify-content-center align-items-center" style="height:100vh" xmlns="http://www.w3.org/1999/html">
+        <div class="col-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5>Подтверждение email<br>
+                        Было выслано письмо на email привязанный к логину
+                    </h5>
+                    <form action="" autocomplete="off" method="post">
+                        {% csrf_token %}
+
+                        <div class="form-group">
+
+                            <label for="name">Код из письма
+                                <input type="text" class="form-control" name="otp">
+                            </label>
+                        </div>
+                        <button type="submit" id="sendlogin" class="btn btn-primary">Войти</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
