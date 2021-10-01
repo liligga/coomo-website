@@ -13,3 +13,4 @@ class NewsListView(generics.ListAPIView):
 class NewsDetailView(generics.RetrieveAPIView):
 	queryset = News.objects.all()
 	serializer_class = NewsDetailSerializer
+
