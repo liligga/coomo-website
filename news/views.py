@@ -6,7 +6,7 @@ from .serializers import NewsListSerializer, NewsDetailSerializer
 
 
 class NewsListView(generics.ListAPIView):
-	queryset = News.objects.all()
+	queryset = News.objects.all()[:8]
 	serializer_class = NewsListSerializer
 
 
