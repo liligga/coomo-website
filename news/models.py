@@ -11,12 +11,6 @@ class News(models.Model):
 		('kg', 'Кыргызский'),
 	]
 
-	PRIORITY = [
-	(1, 'Важные и срочные'),
-	(2, 'Важные и несрочные'),
-	(3, 'Неважные и несрочные'),
-	]
-
 	title = models.CharField(max_length=250, verbose_name='Заголовок')
 	slug = models.SlugField(unique=True, help_text='Выберите язык')
 	text = RichTextUploadingField(verbose_name='Текст')
