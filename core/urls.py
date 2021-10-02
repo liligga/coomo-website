@@ -26,6 +26,7 @@ urlpatterns = [
     path('admin/', decorator_include(login_required, admin.site.urls), name='admin'),
     path('api-auth/', include('rest_framework.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('api-auth/', include('news.urls')),
     path('login_page/', login_page, name='login_page'),
     path('check_otp/<str:email>', check_otp, name='check_otp')
 ]
