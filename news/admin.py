@@ -13,7 +13,7 @@ class NewsAdminForm(forms.ModelForm):
 
 class NewsAdmin(admin.ModelAdmin):
 	prepopulated_fields = {'slug':('title',)}
-	list_display = ('id','title','language','author','created')
+	list_display = ('id','title','language','impotant','author','created')
 	list_display_links = ('id','title')
 	search_fields = ('title',)
 	list_filter = ('title','created')
