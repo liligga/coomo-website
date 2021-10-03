@@ -36,7 +36,7 @@ def login_page(request):
 
         user = authenticate(request, username=username, password=password)
 
-        if user is not None and user.is_staff:
+        if user is not None and user.is_staff and user.email:
             otp = generate_otp()
             user_otp = OneTimePassword.objects.get_or_create(user=user)[0]
             user_otp.otp = otp
