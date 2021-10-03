@@ -39,7 +39,17 @@ class News(models.Model):
 		verbose_name_plural='Новости'
 
 
-
+def news_pre_save(sender, instance, *args, **kwargs):
+        if instance.impotant:
+            try:
+                impotant_news = News.objects.get(impotant=True)
+                if instance != impotant_news:
+                    impotant_news.impotant = False
+                    impotant_news.save()
+            except News.DoesNotExist:
+            	pass
+                
+pre_save.connect(news_pre_save, sender=News)
 
 
 
