@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters',
     'corsheaders',
+    'django_filters',
     'ckeditor',
     'ckeditor_uploader',
 ]
