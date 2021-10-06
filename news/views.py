@@ -10,7 +10,7 @@ class NewsListView(generics.ListAPIView):
 	queryset = News.objects.all()[:8]
 	serializer_class = NewsListSerializer
 	filter_backends = [DjangoFilterBackend] 
-	filterset_fields = ['impotant']
+	filterset_fields = ['important']
 
 
 
