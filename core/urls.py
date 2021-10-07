@@ -13,11 +13,25 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from decorator_include import decorator_include
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
+from django.contrib.auth.decorators import login_required
 from django.urls import path, include
 
+from authentication.views import check_otp, login_page
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
     path('', include('videocourses.urls')),
+    path('', include('news.urls')),
+    path('admin/', decorator_include(login_required, admin.site.urls), name='admin'),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('login_page/', login_page, name='login_page'),
+    path('check_otp/<str:email>', check_otp, name='check_otp')
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

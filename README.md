@@ -10,3 +10,15 @@
 Прогнать миграции и создать суперпользователя
 
 Пушить на свои ветки, `main` и `deploy` не трогать
+
+Чтобы использовать WYSIWYG редактор:
+
+```python
+from django.db import models
+from ckeditor.fields import RichTextField
+
+class Post(models.Model):
+    content = RichTextField()
+```
+
+Для поддержки загрузки файлов юзать `RichTextUploadingField` импорт из  `ckeditor_uploader.fields`
