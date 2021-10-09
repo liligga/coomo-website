@@ -50,7 +50,6 @@ INSTALLED_APPS = [
 
     # Libs
     'rest_framework',
-    'django_filters',
     'corsheaders',
     'django_filters',
     'ckeditor',
