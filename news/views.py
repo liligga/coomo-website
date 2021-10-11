@@ -7,14 +7,22 @@ from .serializers import NewsListSerializer, NewsDetailSerializer
 
 
 class NewsListView(generics.ListAPIView):
-	queryset = News.objects.all()[:8]
+	queryset = News.objects.all()#[:8]
 	serializer_class = NewsListSerializer
 	filter_backends = [DjangoFilterBackend] 
-	filterset_fields = ['important']
+	filterset_fields = ['important', 'language']
+
+	
+
+
+# def last_four_news(self, request, ):
+# 	news = News.objects.order_by('-created')[:4]
+# 	return news
 
 
 
-class NewsDetailView(generics.RetrieveAPIView):
-	queryset = News.objects.all()
-	serializer_class = NewsDetailSerializer
+
+# class NewsDetailView(generics.RetrieveAPIView):
+# 	queryset = News.objects.all()
+# 	serializer_class = NewsDetailSerializer
 
