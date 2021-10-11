@@ -6,6 +6,8 @@ from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from PIL import Image
 from pytils.translit import slugify
+from django.template.defaultfilters import truncatewords
+
 
 
 
@@ -19,22 +21,29 @@ class News(models.Model):
 	title = models.CharField(max_length=250, verbose_name='Заголовок')
 	slug = models.SlugField(blank=True, null=True, unique = True)
 	text = RichTextUploadingField(verbose_name='Текст')
+	excerpt = models.TextField(blank=True, null=True)
 	important = models.BooleanField(default = False, verbose_name = 'Важное')
 	language = models.CharField(max_length=15, choices=LANGUAGE, verbose_name='Язык')
 	author = models.ForeignKey(User, default=True, on_delete=models.CASCADE, verbose_name='Автор')
 	created = models.DateTimeField(auto_now_add=True, verbose_name='Создано')
 	updated = models.DateTimeField(auto_now=True, verbose_name='Обновлено')
-	# cover = models.ImageField(upload_to='uploads', blank=True)
-	# excerpt = models.TextField()
+	cover = models.ImageField(upload_to='uploads', blank=True)
+	banners = models.BooleanField(default=False)
 
 
 	def __str__(self):
-		return self.title
+		return self.title 
 
-
+	
 	def save(self, *args, **kwargs):
 		self.slug = slugify(self.title)
+		self.excerpt = truncatewords(self.text, 35)
 		super(News, self).save(*args, **kwargs)
+
+
+	def get_cover_image(self):
+         return self.images_set.filter(banners=True).first()
+
 
 
 	class Meta:
