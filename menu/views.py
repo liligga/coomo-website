@@ -5,15 +5,15 @@ from .models import *
 
 
 
-class MenuObjectsView(generics.ListAPIView):
-	queryset = MenuObject.active_objects.all()
+class MenuLinksView(generics.ListAPIView):
+	queryset = MenuLink.active_objects.all()
 	serializer_class = MenuSerializer
 	filter_backends = [DjangoFilterBackend]
-	filterset_fields = ['lang_menu_object']
+	filterset_fields = ['lang_menu_link']
 
 
-class FooterObjectsView(generics.ListAPIView):
-	queryset = FooterObject.active_objects.all()
+class FooterLinksView(generics.ListAPIView):
+	queryset = FooterLink.active_objects.all()
 	serializer_class = FooterSerializer
 	filter_backends = [DjangoFilterBackend]
-	filterset_fields = ['lang_footer_object']
+	filterset_fields = ['lang_footer_link']

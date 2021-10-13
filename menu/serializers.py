@@ -6,11 +6,11 @@ from .models import *
 
 class MenuSerializer(serializers.ModelSerializer):
 	class Meta:
-		model = MenuObject
-		fields = ('title', 'link', 'is_active', 'icon', 'lang_menu_object')
+		model = MenuLink
+		fields = ('title', 'link', 'icon', 'lang_menu_link')
 
 
 class FooterSerializer(serializers.ModelSerializer):
 	class Meta:
-		model = FooterObject
-		fields = ('title', 'link', 'is_active', 'lang_footer_object')
+		model = FooterLink
+		fields = ('title', 'link', 'lang_footer_link')
