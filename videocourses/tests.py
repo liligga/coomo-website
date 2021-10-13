@@ -37,13 +37,13 @@ class TestCourse(APITestCase):
 		self.assertEqual(serializer_data, response.data)
 
 	def test_course_list_filtered_en(self):
-		response = self.client.get('/api-auth/videocourses/course_list?lang_course=En')
+		response = self.client.get(reverse('course_list')+'?lang_course=En')
 		self.assertEqual(response.status_code, status.HTTP_200_OK)
 		self.assertEqual(len(response.data), 1)
 		self.assertTrue({'id':2, 'name':'Test Course English','description':'Test description english', 'lang_course':'En'}) in response.json()
 
 	def test_course_list_filtered_kg(self):
-		response = self.client.get('/api-auth/videocourses/course_list?lang_course=Kg')	
+		response = self.client.get(reverse('course_list')+'?lang_course=Kg')
 		self.assertEqual(response.status_code, status.HTTP_200_OK)
 		self.assertEqual(len(response.data), 1)
 		self.assertTrue({'id':3, 'name':'Test Course Kyrgyz','description':'Test description kyrgyz', 'lang_course':'Kg'}) in response.json()
