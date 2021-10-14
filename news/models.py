@@ -1,13 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.utils.text import  slugify
+from django.utils.text import slugify
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from PIL import Image
 from pytils.translit import slugify
 from django.template.defaultfilters import truncatewords
-
 
 
 
@@ -30,7 +29,6 @@ class News(models.Model):
 	cover = models.ImageField(upload_to='uploads', blank=True)
 	banners = models.BooleanField(default=False, verbose_name='Баннер')
 
-
 	def __str__(self):
 		return self.title 
 
@@ -42,22 +40,19 @@ class News(models.Model):
 
 
 	class Meta:
-		verbose_name='Новость'
-		verbose_name_plural='Новости'
+		verbose_name = 'Новость'
+		verbose_name_plural = 'Новости'
 
 
 def news_pre_save(sender, instance, *args, **kwargs):
-		if instance.important:
-			try:
-				important_news = News.objects.get(important=True)
-				if instance != important_news:
-					important_news.important = False
-					important_news.save()
-			except News.DoesNotExist:
-				pass
-				
+	if instance.important:
+		try:
+			important_news = News.objects.get(important=True)
+			if instance != important_news:
+				important_news.important = False
+				important_news.save()
+		except News.DoesNotExist:
+			pass
+
+
 pre_save.connect(news_pre_save, sender=News)
-
-
-
-
