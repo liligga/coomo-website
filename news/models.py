@@ -20,8 +20,8 @@ class News(models.Model):
 
 	title = models.CharField(max_length=250, verbose_name='Заголовок')
 	slug = models.SlugField(blank=True, null=True, unique = True)
-	text = RichTextUploadingField(verbose_name='Текст')
-	excerpt = models.TextField(blank=True, null=True)
+	article = RichTextUploadingField(verbose_name='Статья')
+	excerpt = models.TextField(blank=True, null=True, verbose_name='Отрывок из статьи')
 	important = models.BooleanField(default = False, verbose_name = 'Важное')
 	language = models.CharField(max_length=15, choices=LANGUAGE, verbose_name='Язык')
 	author = models.ForeignKey(User, default=True, on_delete=models.CASCADE, verbose_name='Автор')
@@ -37,7 +37,7 @@ class News(models.Model):
 	
 	def save(self, *args, **kwargs):
 		self.slug = slugify(self.title)
-		self.excerpt = truncatewords(self.text, 35)
+		self.excerpt = truncatewords(self.article, 35)
 		super(News, self).save(*args, **kwargs)
 
 

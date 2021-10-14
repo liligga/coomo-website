@@ -7,7 +7,7 @@ from .models import News
 class NewsLastestSerializer(serializers.Serializer):
 	title = serializers.CharField(max_length=250)
 	slug = serializers.SlugField()
-	text = serializers.CharField()
+	article = serializers.CharField()
 	excerpt = serializers.CharField()
 	created = serializers.DateTimeField()
 	cover = serializers.ImageField()

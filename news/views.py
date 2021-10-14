@@ -4,12 +4,11 @@ from rest_framework import generics
 from django_filters.rest_framework import DjangoFilterBackend
 from .models import *
 from .serializers import NewsLastestSerializer, NewsDetailSerializer
-from django.http import JsonResponse
+
 
 
 
 class NewsView(APIView):
-	context_object_name = 'news_list'	
 	def get(self, request):
 		last_eight_news = News.objects.order_by('-created')[:8]
 		important_news = News.objects.filter(important=True)
