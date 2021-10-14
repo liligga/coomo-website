@@ -10,7 +10,7 @@ LANGUAGE_CHOICES = [
 
 SCHOOL_SUBJECTS = [
 	('Math_ru', 'Математика(русский язык)'),
-	('Math_kg', 'Математика(кыргызский язык)')
+	('Math_kg', 'Математика(кыргызский')
 ]
 class OnlineTest(models.Model):
 	name = models.CharField(max_length=50, verbose_name='Предмет')
@@ -30,3 +30,26 @@ class OnlineTest(models.Model):
 
 	def __str__(self):
 		return self.name
+
+
+class OnlineTestQuestion(models.Model):
+	onlinetest = models.ForeignKey(OnlineTest, on_delete=models.CASCADE, related_name='questions')
+	question = models.ImageField(upload_to='ort/images/question/', verbose_name='Картинка с вопросами')
+	num_start = models.IntegerField(verbose_name='С какого вопроса начинается тест на картинке(номер)')
+	num_end = models.IntegerField(verbose_name='На каком вопросе заканчивается тест на картинке(номер)')
+
+
+CORRECT_ANS_CHOICES = [
+	(1, 'А'),
+	(2, 'Б'),
+	(3, 'В'),
+	(4, 'Г'),
+	(5, 'Д'),
+	(6, 'Е'),
+]
+
+
+class AnswerTest(models.Model):
+	onlinetest = models.ForeignKey(OnlineTest, on_delete=models.CASCADE, related_name='answers')
+	question_number = models.IntegerField(verbose_name='Номер вопроса')
+	correct_answer = models.IntegerField(default=1, choices=CORRECT_ANS_CHOICES, verbose_name='Правильный ответ')
