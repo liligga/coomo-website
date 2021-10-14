@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django_filters.rest_framework import DjangoFilterBackend
 from .models import *
 from rest_framework.response import Response

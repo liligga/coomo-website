@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     # Apps
     'news',
     'authentication',
+    'videocourses',
+    'menu',
+    'online_test',
 
     # Django
     'django.contrib.admin',
@@ -54,7 +57,6 @@ INSTALLED_APPS = [
     # Libs
     'rest_framework',
     'corsheaders',
-    'django_filters',
     'ckeditor',
     'ckeditor_uploader',
 ]
