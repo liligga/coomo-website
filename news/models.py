@@ -28,7 +28,7 @@ class News(models.Model):
 	created = models.DateTimeField(auto_now_add=True, verbose_name='Создано')
 	updated = models.DateTimeField(auto_now=True, verbose_name='Обновлено')
 	cover = models.ImageField(upload_to='uploads', blank=True)
-	banners = models.BooleanField(default=False)
+	banners = models.BooleanField(default=False, verbose_name='Баннер')
 
 
 	def __str__(self):
@@ -39,11 +39,6 @@ class News(models.Model):
 		self.slug = slugify(self.title)
 		self.excerpt = truncatewords(self.text, 35)
 		super(News, self).save(*args, **kwargs)
-
-
-	def get_cover_image(self):
-         return self.images_set.filter(banners=True).first()
-
 
 
 	class Meta:

@@ -1,33 +1,24 @@
 from rest_framework import serializers
 from ckeditor_uploader.fields import RichTextUploadingField
+from django.contrib.auth.models import User
 from .models import News
 
 
 class NewsLastestSerializer(serializers.Serializer):
-	slug = serializers.SlugField()
 	title = serializers.CharField(max_length=250)
+	slug = serializers.SlugField()
+	text = serializers.CharField()
 	excerpt = serializers.CharField()
 	created = serializers.DateTimeField()
-	
-
-class NewsImportantSerializer(serializers.Serializer):
-	slug = serializers.SlugField()
-	title = serializers.CharField(max_length=250)
-	excerpt = serializers.CharField()
-	important = serializers.BooleanField(read_only=True)
-	created = serializers.DateTimeField()
-
-
-class NewsBannerSerializer(serializers.Serializer):
-	slug = serializers.SlugField()
-	title = serializers.CharField(max_length=250)
-	excerpt = serializers.CharField()
 	cover = serializers.ImageField()
-	banners = serializers.BooleanField()
-	created = serializers.DateTimeField()
 	
 
+class NewsDetailSerializer(serializers.ModelSerializer):
+	author = serializers.SlugRelatedField(slug_field='username', read_only=True)
 
+	class Meta:
+		model = News
+		fields = '__all__'
 	
 
 
