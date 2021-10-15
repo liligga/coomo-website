@@ -17,7 +17,7 @@ class OnlineTest(models.Model):
 	part_num = models.IntegerField(default=1, verbose_name='Часть')
 	version = models.IntegerField(default=1, verbose_name='Вариант')
 	duration = models.IntegerField(verbose_name='Время (в минутах)')
-	num_questions = models.IntegerField(verbose_name='Количество заданий')
+	num_questions = models.IntegerField(verbose_name='Количество вопросов')
 	num_answers = models.IntegerField(verbose_name='Количество вариантов ответа')
 	language = models.CharField(max_length=15,default='Ru', choices=LANGUAGE_CHOICES, verbose_name='Язык теста')
 	is_active = models.BooleanField(default=True, verbose_name='Опубликован')
