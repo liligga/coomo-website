@@ -12,7 +12,7 @@ class NewsView(APIView):
 	def get(self, request):
 		last_eight_news = News.objects.order_by('-created')[:8]
 		important_news = News.objects.filter(important=True)
-		banners = News.objects.all()
+		banners = News.objects.filter(banners = True)
 		serializer1 = NewsLastestSerializer(last_eight_news, many=True)
 		serializer2 = NewsLastestSerializer(important_news, many=True)
 		serializer3 = NewsLastestSerializer(banners, many=True)
