@@ -13,8 +13,10 @@ from django.template.defaultfilters import truncatewords
 class News(models.Model):
 	LANGUAGE = [
 		(None, 'Выберите язык'),
-		('ru', 'Русский'),
-		('kg', 'Кыргызский'),
+		('Ru', 'Русский'),
+		('Kg', 'Кыргызский'), 
+		('En', 'Английский'),
+
 	]
 
 	title = models.CharField(max_length=250, verbose_name='Заголовок')
