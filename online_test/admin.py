@@ -1,5 +1,13 @@
 from django.contrib import admin
-from .models import OnlineTest
+from .models import *
+
+
+class QuestionInstanceAdmin(admin.TabularInline):
+	model = OnlineTestQuestion
+
+
+class AnswerInstanceAdmin(admin.TabularInline):
+	model = AnswerTest
 
 
 @admin.register(OnlineTest)
@@ -12,3 +20,4 @@ class OnlineTestAdmin(admin.ModelAdmin):
 	'language',
 	'is_active',
 	]
+	inlines = [QuestionInstanceAdmin, AnswerInstanceAdmin]
