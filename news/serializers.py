@@ -1,23 +1,30 @@
 from rest_framework import serializers
-# from django.utils.text import slugify
+from ckeditor_uploader.fields import RichTextUploadingField
+from django.contrib.auth.models import User
 from .models import News
 
 
-class NewsListSerializer(serializers.ModelSerializer):
+class NewsLastestSerializer(serializers.Serializer):
+	id = serializers.IntegerField(label='ID')
+	title = serializers.CharField(max_length=250)
+	slug = serializers.SlugField()
+	article = serializers.CharField()
+	excerpt = serializers.CharField()
+	created = serializers.DateTimeField()
+	cover = serializers.ImageField()
 	
-	class Meta:
-		model = News
-		fields = ['title','slug','important', 'created']
-
-
-
 
 class NewsDetailSerializer(serializers.ModelSerializer):
-	author = serializers.SlugRelatedField('username', read_only=True)
-	#related_news = ['title','slug','important']
-	
+	author = serializers.SlugRelatedField(slug_field='username', read_only=True)
 
 	class Meta:
 		model = News
 		fields = '__all__'
+	
+
+class SearchNewsSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = News
+		fields = '__all__'
+
 
