@@ -17,9 +17,9 @@ class KgCoursesManager(models.Manager):
 
 
 class Course(models.Model):
-	name = models.CharField(max_length=100)
-	description = models.TextField(unique=True)
-	lang_course = models.CharField(default="Ru", choices=LANGUAGE_CHOICES, max_length=15)
+	name = models.CharField(max_length=100, verbose_name='Название курса')
+	description = models.TextField(unique=True, verbose_name='Описание курса')
+	lang_course = models.CharField(default="Ru", choices=LANGUAGE_CHOICES, max_length=15, verbose_name='Язык курса')
 
 	def __str__(self):
 		return self.name
@@ -34,10 +34,10 @@ class Course(models.Model):
 
 
 class Video(models.Model):
-	course = models.ForeignKey(Course, on_delete = models.CASCADE, related_name='videos')
-	name = models.CharField(max_length=150)
-	video_link = models.URLField(max_length = 150, unique=True, blank=True)
-	lang_video = models.CharField(default='Ru', choices=LANGUAGE_CHOICES, max_length=15)
+	course = models.ForeignKey(Course, on_delete = models.CASCADE, related_name='videos', verbose_name='Принадлежащий курс')
+	name = models.CharField(max_length=150, verbose_name='Название видео')
+	video_link = models.URLField(max_length = 150, unique=True, blank=True, verbose_name='Ссылка на видео')
+	lang_video = models.CharField(default='Ru', choices=LANGUAGE_CHOICES, max_length=15, verbose_name='Язык видео')
 
 	def __str__(self):
 		return self.name

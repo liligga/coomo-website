@@ -20,4 +20,5 @@ class OnlineTestAdmin(admin.ModelAdmin):
 	'language',
 	'is_active',
 	]
+	list_display_links = ['id', 'name']
 	inlines = [QuestionInstanceAdmin, AnswerInstanceAdmin]

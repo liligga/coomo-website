@@ -1,6 +1,5 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from .models import *
-from rest_framework.response import Response
 from rest_framework import generics
 from .serializers import CoursesListSerializer, CourseDetailSerializer, VideoSerializer
 
