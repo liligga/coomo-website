@@ -1,10 +1,12 @@
-from django.urls import path
-from .views import *
-from . import views
+from django.urls import path, include
+from .views import OnlineTestViewSet
+from rest_framework import routers
 
+router = routers.SimpleRouter()
+router.register(r'tests', OnlineTestViewSet)
 
 
 urlpatterns = [
-	path('api/tests', views.OnlineTestListView.as_view(), name="tests_list"),
+	path('api/', include(router.urls)),
 
 ]
