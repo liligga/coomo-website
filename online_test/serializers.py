@@ -14,3 +14,8 @@ class OnlineTestListSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = OnlineTest
 		fields = ('name', 'intro', 'part_num', 'version', 'duration', 'num_questions', 'language', 'questions')
+
+class AnswerSerializer(serializers.Serializer):
+	number = serializers.IntegerField()
+	answer = serializers.IntegerField()
+
