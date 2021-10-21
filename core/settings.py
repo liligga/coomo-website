@@ -31,7 +31,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = os.environ.get('DEBUG')
 
 # TODO: выставить разрешенные айпи при деплое на сервер
-ALLOWED_HOSTS = ['http://localhost:8000', 'http://localhost:3000', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', 'http://localhost:3000', '127.0.0.1']
 
 # Application definition
 
@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'ckeditor',
     'ckeditor_uploader',
+    'django_filters',
 ]
 
 MIDDLEWARE = [

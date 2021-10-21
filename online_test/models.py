@@ -38,6 +38,13 @@ class OnlineTestQuestion(models.Model):
 	num_start = models.IntegerField(verbose_name='С какого вопроса начинается тест на картинке(номер)')
 	num_end = models.IntegerField(verbose_name='На каком вопросе заканчивается тест на картинке(номер)')
 
+	class Meta:
+		verbose_name = 'вопрос к тесту'
+		verbose_name_plural = 'Вопросы к тесту'
+
+
+
+
 
 CORRECT_ANS_CHOICES = [
 	(1, 'А'),
@@ -53,3 +60,7 @@ class AnswerTest(models.Model):
 	onlinetest = models.ForeignKey(OnlineTest, on_delete=models.CASCADE, related_name='answers')
 	question_number = models.IntegerField(verbose_name='Номер вопроса')
 	correct_answer = models.IntegerField(default=1, choices=CORRECT_ANS_CHOICES, verbose_name='Правильный ответ')
+
+	class Meta:
+		verbose_name = 'Ответ к тесту'
+		verbose_name_plural = 'Ответы к тесту'
