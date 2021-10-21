@@ -3,7 +3,9 @@ from rest_framework.views import APIView
 from rest_framework import generics
 from django_filters.rest_framework import DjangoFilterBackend
 from .models import *
-from .serializers import NewsLastestSerializer, NewsDetailSerializer
+from .serializers import NewsSerializer, NewsDetailSerializer
+from menu.models import MenuLink
+from menu.serializers import MenuSerializer
 
 
 
@@ -13,12 +15,15 @@ class NewsView(APIView):
 		last_eight_news = News.objects.order_by('-created')[:8]
 		important_news = News.objects.filter(important=True)
 		banners = News.objects.filter(banners = True)
-		serializer1 = NewsLastestSerializer(last_eight_news, many=True)
-		serializer2 = NewsLastestSerializer(important_news, many=True)
-		serializer3 = NewsLastestSerializer(banners, many=True)
+		menu = MenuLink.objects.filter(is_active=True)
+		serializer1 = NewsSerializer(last_eight_news, many=True)
+		serializer2 = NewsSerializer(important_news, many=True)
+		serializer3 = NewsSerializer(banners, many=True)
+		serializer4 = MenuSerializer(menu, many=True)
 		context = {'last_eight_news':serializer1.data,
 					'important_news':serializer2.data,
-					'banners':serializer3.data}
+					'banners':serializer3.data,
+					'menu':serializer4.data}
 
 		return Response(context)
 
