@@ -1,9 +1,17 @@
-Склонировать.
+Склонировать. Установить глобально pipenv
 
-Создать окружение `python -m venv venv`
+Создать окружение и сразу запустить `pipenv shell`
 
 Запустить окружение и установить зависимости
-`pip install -r requirements.txt`
+```
+pipenv shell
+pipenv install
+```
+Установить пакет `pipenv install package-name`
+
+Удалить какой-либо пакет `pipenv uninstall package-name`
+
+Деактивировать окружение `exit`
 
 Заполнить свой **.env** файл используя пример **.env_example**
 

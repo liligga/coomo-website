@@ -31,7 +31,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = os.environ.get('DEBUG')
 
 # TODO: выставить разрешенные айпи при деплое на сервер
-ALLOWED_HOSTS = ['http://localhost:8000', 'http://localhost:3000', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', 'http://localhost:3000', '127.0.0.1']
 
 # Application definition
 
@@ -51,13 +51,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'drf_yasg',
+   
 
     # Libs
     'rest_framework',
-    'django_filters',
     'corsheaders',
     'ckeditor',
     'ckeditor_uploader',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -150,6 +152,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny'
+    ],
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
 
