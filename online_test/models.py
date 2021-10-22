@@ -24,11 +24,27 @@ SCHOOL_SUBJECTS = [
 
 
 class OnlineTest(models.Model):
+	PART_NUMBERS = [
+		(1, 'I'),
+		(2, 'II'),
+		(3, 'III'),
+		(4, 'IV'),
+		(5, 'V'),
+		(6, 'VI'),
+		(7, 'VII'),
+		(8, 'VIII'),
+		(9, 'IX'),
+		(10, 'X'),
+	]
 	name = models.CharField(
 		max_length=50,
 		choices=SCHOOL_SUBJECTS,
 		verbose_name='Предмет')
-	part_num = models.IntegerField(default=1, verbose_name='Часть')
+	part_num = models.CharField(
+		verbose_name='Часть',
+		choices=PART_NUMBERS,
+		blank=True,
+		max_length=20)
 	version = models.IntegerField(default=1, verbose_name='Вариант')
 	duration = models.IntegerField(verbose_name='Время (в минутах)')
 	num_questions = models.IntegerField(verbose_name='Количество вопросов')
