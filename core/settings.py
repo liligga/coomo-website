@@ -38,7 +38,6 @@ ALLOWED_HOSTS = ['localhost', 'http://localhost:3000', '127.0.0.1']
 INSTALLED_APPS = [
 
     # Apps
-    'news',
     'authentication',
     'videocourses',
     'menu',
