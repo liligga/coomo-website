@@ -21,6 +21,7 @@ drf-yasg = "*"
 django-cors-headers = "*"
 pytils = "*"
 django-decorator-include = "*"
+psycopg2-binary = "*"
 
 [dev-packages]
 
