@@ -1,15 +1,7 @@
 from django.contrib import admin
 from django import forms
-from ckeditor_uploader.widgets import CKEditorUploadingWidget
 from .models import *
 from django.utils.safestring import mark_safe
-
-
-# class NewsAdminForm(forms.ModelForm):
-# 	article = forms.CharField(widget=CKEditorUploadingWidget())
-# 	class Meta:
-# 		model = News
-# 		fields = '__all__'
 
 
 class NewsAdmin(admin.ModelAdmin):
@@ -17,7 +9,6 @@ class NewsAdmin(admin.ModelAdmin):
 	list_display_links = ('id','title')
 	search_fields = ('title',)
 	list_filter = ('title','created')
-	# form = NewsAdminForm
 
 	def save_model(self, request, obj, form, change):
 		obj.author = request.user

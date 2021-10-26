@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.utils.text import slugify
+# from django.utils.text import slugify
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
