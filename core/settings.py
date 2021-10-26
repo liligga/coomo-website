@@ -34,7 +34,7 @@ DEBUG = os.environ.get('DEBUG')
 
 # TODO: выставить разрешенные айпи при деплое на сервер
 ALLOWED_HOSTS = ['localhost', 'http://localhost:3000', '127.0.0.1', ]
-ALLOWED_HOSTS.append(os.environ.get('ALLOWED_HOSTS', ''))
+ALLOWED_HOSTS.append(os.environ.get('ALLOWED_HOSTS'))
 # Application definition
 
 INSTALLED_APPS = [
@@ -166,13 +166,14 @@ REST_FRAMEWORK = {
 }
 
 # CORS
-CORS_ORIGIN_WHITELIST = (
+CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
-)
+]
+CORS_ORIGIN_WHITELIST.append(os.environ.get('ALLOWED_HOSTS'))
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-DEFAULT_FROM_EMAIL = 'test@test.com'
+# DEFAULT_FROM_EMAIL = 'test@test.com'
 LOGIN_REDIRECT_URL = '/login_page/'
 LOGIN_URL = '/login_page/'
 
@@ -183,6 +184,14 @@ CKEDITOR_THUMBNAIL_SIZE = (300, 300)
 CKEDITOR_IMAGE_QUALITY = 60
 CKEDITOR_BROWSE_SHOW_DIRS = True
 CKEDITOR_ALLOW_NONIMAGE_FILES = True
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = os.environ.get('EMAIL_HOST')
+EMAIL_PORT = int(os.environ.get('EMAIL_PORT'))
+EMAIL_USE_TLS = bool(os.environ.get('EMAIL_USE_TLS'))
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
 
 CKEDITOR_CONFIGS = {
     'default': {
