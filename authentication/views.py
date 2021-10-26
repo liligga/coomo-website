@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.shortcuts import render, redirect
 from django.urls import reverse
-
+from django.conf import settings
 from authentication.models import OneTimePassword
 
 
@@ -23,7 +23,7 @@ def send_email(email, username, otp):
     send_mail(
         subject='Код подтверждения',
         message=f'Здравствуйте, {username}! Ваш код: {otp}',
-        from_email='test@test.com',
+        from_email=settings.DEFAULT_FROM_EMAIL,
         recipient_list=[email,],
         fail_silently=False,
     )
