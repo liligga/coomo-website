@@ -169,7 +169,7 @@ REST_FRAMEWORK = {
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
 ]
-CORS_ORIGIN_WHITELIST.append(os.environ.get('ALLOWED_HOSTS'))
+CORS_ORIGIN_WHITELIST.append('http://' + os.environ.get('ALLOWED_HOSTS'))
 
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
