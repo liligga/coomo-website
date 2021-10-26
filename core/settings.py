@@ -34,7 +34,7 @@ DEBUG = os.environ.get('DEBUG')
 
 # TODO: выставить разрешенные айпи при деплое на сервер
 ALLOWED_HOSTS = ['localhost', 'http://localhost:3000', '127.0.0.1', ]
-
+ALLOWED_HOSTS.append(os.environ.get('ALLOWED_HOSTS', ''))
 # Application definition
 
 INSTALLED_APPS = [
@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'videocourses',
     'menu',
     'online_test',
+    'news',
 
     # Django
     'django.contrib.admin',
