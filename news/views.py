@@ -1,13 +1,9 @@
-from rest_framework.generics import ListAPIView
+from rest_framework.generics import ListAPIView, RetrieveAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework import generics, filters
-from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import filters
 from .models import *
-
-from .serializers import NewsDetailSerializer, SearchNewsSerializer
-
-from .serializers import NewsSerializer, NewsDetailSerializer
+from .serializers import NewsSerializer, NewsDetailSerializer, SearchNewsSerializer
 from menu.models import MenuLink
 from menu.serializers import MenuSerializer
 
@@ -30,20 +26,22 @@ class NewsView(APIView):
         return Response(context)
 
 
-class NewsDetailView(generics.RetrieveAPIView):
-    queryset = News.objects.all()
-    serializer_class = NewsDetailSerializer
-
-    def retrieve(self, request, *args, **kwargs):
-        result = super(NewsDetailView, self).retrieve(request, *args, **kwargs)
-        four_last_news = News.objects.all()[:4]
-        four_last_news = NewsDetailSerializer(four_last_news, many=True)
-
-        return Response({'current_article': result.data, 'related': four_last_news.data})
-
-
 class SearchView(ListAPIView):
     filter_backends = (filters.SearchFilter,)
     search_fields = ['title', 'article']
     queryset = News.objects.all()
     serializer_class = SearchNewsSerializer
+
+
+class NewsDetailAPIView(RetrieveAPIView):
+    queryset = News.objects.all()
+    serializer_class = NewsDetailSerializer
+    lookup_field = 'slug'
+
+    def get(self, request, *args, **kwargs):
+        current = News.objects.get(slug=kwargs.get('slug')).news
+        current_news = NewsDetailSerializer(current, many=True)
+        four_last_news = News.objects.all().order_by('-id')[:4]
+        four_last_news = NewsDetailSerializer(four_last_news, many=True)
+
+        return Response({'current_news': current_news.data, 'related': four_last_news.data})

@@ -28,7 +28,7 @@ class News(models.Model):
     cover = models.ImageField(upload_to='uploads', blank=True)
     banners = models.BooleanField(default=False, verbose_name='Баннер')
     parent = models.ForeignKey('self', verbose_name='Родительская новость', on_delete=models.SET_NULL, blank=True,
-                               null=True)
+                               null=True, related_name='news')
 
     def __str__(self):
         return self.title
