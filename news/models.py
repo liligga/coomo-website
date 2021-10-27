@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 # from django.utils.text import slugify
 from ckeditor_uploader.fields import RichTextUploadingField
-from django.db.models.signals import pre_save
+from django.db.models.signals import pre_save, post_save
 from django.dispatch import receiver
 from PIL import Image
 from pytils.translit import slugify
@@ -11,11 +11,9 @@ from django.template.defaultfilters import truncatewords
 
 class News(models.Model):
     LANGUAGE = [
-    (None, 'Выберите язык'),
-    ('Ru', 'Русский'),
-    ('Kg', 'Кыргызский'),
-    ('En', 'Английский'),
-
+        (None, 'Выберите язык'),
+        ('Ru', 'Русский'),
+        ('Kg', 'Кыргызский'),
     ]
 
     title = models.CharField(max_length=250, verbose_name='Заголовок')
@@ -23,7 +21,7 @@ class News(models.Model):
     article = RichTextUploadingField(verbose_name='Статья')
     excerpt = models.TextField(blank=True, null=True, verbose_name='Отрывок из статьи')
     important = models.BooleanField(default=False, verbose_name='Важное')
-    language = models.CharField(max_length=15, choices=LANGUAGE, verbose_name='Язык')
+    language = models.CharField(max_length=15, choices=LANGUAGE, verbose_name='Язык', default='Ru')
     author = models.ForeignKey(User, default=True, on_delete=models.CASCADE, verbose_name='Автор')
     created = models.DateTimeField(auto_now_add=True, verbose_name='Создано')
     updated = models.DateTimeField(auto_now=True, verbose_name='Обновлено')
@@ -46,8 +44,6 @@ class News(models.Model):
 
 
 def news_pre_save(sender, instance, *args, **kwargs):
-    if not instance.parent:
-        instance.parent = instance
     if instance.important:
         try:
             important_news = News.objects.get(important=True)
@@ -56,6 +52,14 @@ def news_pre_save(sender, instance, *args, **kwargs):
                 important_news.save()
         except News.DoesNotExist:
             pass
+
+
+@receiver(post_save, sender=News)
+def news_save(sender, instance, created, **kwargs):
+    if created:
+        if not instance.parent:
+            instance.parent = instance
+            instance.save()
 
 
 pre_save.connect(news_pre_save, sender=News)
