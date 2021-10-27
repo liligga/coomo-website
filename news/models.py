@@ -25,10 +25,10 @@ class News(models.Model):
     author = models.ForeignKey(User, default=True, on_delete=models.CASCADE, verbose_name='Автор')
     created = models.DateTimeField(auto_now_add=True, verbose_name='Создано')
     updated = models.DateTimeField(auto_now=True, verbose_name='Обновлено')
-    cover = models.ImageField(upload_to='uploads', blank=True)
+    cover = models.ImageField(upload_to='uploads', blank=True, verbose_name='Обложка')
     banners = models.BooleanField(default=False, verbose_name='Баннер')
     parent = models.ForeignKey('self', verbose_name='Родительская новость', on_delete=models.SET_NULL, blank=True,
-                               null=True, related_name='news')
+                               null=True, related_name='news',)
 
     def __str__(self):
         return self.title

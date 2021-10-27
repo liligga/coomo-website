@@ -4,12 +4,27 @@ from .models import *
 from django.utils.safestring import mark_safe
 
 
-
 class NewsAdmin(admin.ModelAdmin):
     list_display = ('id', 'language', 'title', 'important', 'created')
-    list_display_links = ('id','title')
+    list_display_links = ('id', 'title')
     search_fields = ('title',)
-    list_filter = ('title','created')
+    list_filter = ('title', 'created')
+
+    fieldsets = [
+
+        ('Новости на других языках', {
+            'fields': ('parent',),
+            'description': '<p>Укажите <strong>главную новость</strong>, если эта является ее переводом</p>'
+        },),
+        ('Создание новости', {
+            'fields': ('title', 'article', 'important', 'language', 'cover')
+        },),
+        ('Другие возможности', {
+            'fields': ('banners',),
+            'description': '<strong>Использовать эту новость как баннер на главной</strong>'
+        })
+
+    ]
 
     def save_model(self, request, obj, form, change):
         obj.author = request.user
