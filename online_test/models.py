@@ -5,7 +5,6 @@ from ckeditor.fields import RichTextField
 LANGUAGE_CHOICES = [
 	('Ru', 'Русский'),
 	('Kg', 'Кыргызский'),
-	('En', 'Английский'),
 ]
 
 
