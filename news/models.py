@@ -13,8 +13,8 @@ CLEAN_RE = re.compile('<.*?>|&([a-z0-9]+|#[0-9]{1,6}|#x[0-9a-f]{1,6});')
 
 
 def clean_html(raw_html):
-  clean_text = re.sub(CLEAN_RE, '', raw_html)
-  return clean_text
+    clean_text = re.sub(CLEAN_RE, '', raw_html)
+    return clean_text
 
 
 class News(models.Model):
