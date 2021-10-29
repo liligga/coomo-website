@@ -25,3 +25,8 @@ class NewsDetailSerializer(serializers.ModelSerializer):
 	
 
 
+class SearchNewsSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = News
+		fields = '__all__'
+
