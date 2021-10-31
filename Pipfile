@@ -21,9 +21,11 @@ drf-yasg = "*"
 django-cors-headers = "*"
 pytils = "*"
 django-decorator-include = "*"
+pipfile = "*"
 psycopg2 = "*"
 
 [dev-packages]
 
 [requires]
 python_version = "3.9"
+
