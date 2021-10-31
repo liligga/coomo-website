@@ -21,6 +21,10 @@ drf-yasg = "*"
 django-cors-headers = "*"
 pytils = "*"
 django-decorator-include = "*"
+<<<<<<< HEAD
+=======
+pipfile = "*"
+>>>>>>> db1f1cb14cf429e391f65b3865fe9529912873cf
 psycopg2 = "*"
 
 [dev-packages]

@@ -9,8 +9,8 @@ class CourseListView(generics.ListAPIView):
 	serializer_class = CoursesListSerializer
 	filter_backends = [DjangoFilterBackend]
 	filterset_fields = ['lang_course']
-	'''http://*?lang_course=En должно быть после всей ссылки,
-	course_list?lang_course=En'''
+	'''http://*?lang_course=Kg должно быть после всей ссылки,
+	course_list?lang_course=Kg'''
 
 
 class CourseDetailView(generics.RetrieveAPIView):
