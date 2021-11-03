@@ -4,12 +4,8 @@ from django.db import models
 LANGUAGE_CHOICES = [
 	('Ru', 'Русский'),
 	('Kg', 'Кыргызский'),
-	('En', 'Английский'),
-
 ]
-"""Cлово "Кыргызский" можно поменять на "Кыргызча" по желанию
-	Слово "Английский" можно поменять на "English" по желанию"""
-
+"""Cлово "Кыргызский" можно поменять на "Кыргызча" по желанию"""
 
 class EngCoursesManager(models.Manager):
 	def get_queryset(self):

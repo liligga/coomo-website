@@ -1,16 +1,22 @@
 import re
+import os
 from django.db import models
+from io import BytesIO
+from django.core.files import File
 from django.dispatch import receiver
+from pathlib import Path
 from django.contrib.auth.models import User
 # from django.utils.text import slugify
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.db.models.signals import pre_save, post_save
-from django.dispatch import receiver
 from PIL import Image
 from io import BytesIO
 from django.core.files import File
 from pytils.translit import slugify
 from django.template.defaultfilters import truncatewords
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 CLEAN_RE = re.compile('<.*?>|&([a-z0-9]+|#[0-9]{1,6}|#x[0-9a-f]{1,6});')
 
@@ -20,14 +26,12 @@ def clean_html(raw_html):
     return clean_text
 
 
-
 class News(models.Model):
     LANGUAGE = [
         (None, 'Выберите язык'),
         ('Ru', 'Русский'),
         ('Kg', 'Кыргызский'),
     ]
-
 
     title = models.CharField(max_length=250, verbose_name='Заголовок')
     slug = models.SlugField(blank=True, null=True, unique=True)
@@ -39,8 +43,8 @@ class News(models.Model):
     created = models.DateTimeField(auto_now_add=True, verbose_name='Создано')
     updated = models.DateTimeField(auto_now=True, verbose_name='Обновлено')
     cover = models.ImageField(upload_to='news', blank=True, verbose_name='Обложка')
-    thumbnail = models.ImageField(upload_to='news',blank=True, null=True)
     banners = models.BooleanField(default=False, verbose_name='Баннер')
+    thumbnail = models.ImageField(upload_to='news', blank=True, null=True, help_text='Заполняется автоматически', verbose_name='Баннер новости')
     parent = models.ForeignKey('self', verbose_name='Родительская новость', on_delete=models.SET_NULL, blank=True,
                                null=True, related_name='news', )
 
@@ -66,8 +70,6 @@ class News(models.Model):
         img.save(thumb_io, 'JPEG', quality=85)
         thumbnail = File(thumb_io, name=cover.name)
         return thumbnail
-
-
 
 
 def news_pre_save(sender, instance, *args, **kwargs):

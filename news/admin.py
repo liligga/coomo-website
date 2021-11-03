@@ -30,6 +30,7 @@ class NewsAdmin(admin.ModelAdmin):
         obj.author = request.user
         super().save_model(request, obj, form, change)
 
+
     def get_cover(self, obj):
         if obj.cover:
             return mark_safe(f'<img src={obj.cover.url} width="50" height="60">')
