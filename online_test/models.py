@@ -77,8 +77,11 @@ class OnlineTestQuestion(models.Model):
 		verbose_name='На каком вопросе заканчивается тест на картинке(номер)')
 
 	class Meta:
-		verbose_name = 'вопрос к тесту'
+		verbose_name = 'Вопрос к тесту'
 		verbose_name_plural = 'Вопросы к тесту'
+
+	def __str__(self):
+		return ''
 
 
 CORRECT_ANS_CHOICES = [
@@ -105,3 +108,7 @@ class AnswerTest(models.Model):
 	class Meta:
 		verbose_name = 'Ответ к тесту'
 		verbose_name_plural = 'Ответы к тесту'
+
+	def __str__(self):
+		return f'Вопрос номер {self.question_number}'
+
