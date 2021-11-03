@@ -35,3 +35,6 @@ class GalleryImage(models.Model):
 	class Meta:
 		verbose_name='Картинка в галлерее'
 		verbose_name_plural='Картинки в галлерее'
+
+	def __str__(self):
+		return ''
