@@ -83,4 +83,3 @@ def get_excel_answers(sender, instance, created, **kwargs):
                     answers = AnswerTest.objects.create(onlinetest=instance, question_number=col_contents.values[0],
                                                         correct_answer=col_contents.values[1])
                     answers.save()
-                    print(answers)
