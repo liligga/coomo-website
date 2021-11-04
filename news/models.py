@@ -1,3 +1,4 @@
+
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.text import slugify
@@ -9,21 +10,19 @@ from pytils.translit import slugify
 from django.template.defaultfilters import truncatewords
 
 
-
 class News(models.Model):
 	LANGUAGE = [
 		(None, 'Выберите язык'),
 		('Ru', 'Русский'),
-		('Kg', 'Кыргызский'), 
-		('En', 'Английский'),
+		('Kg', 'Кыргызский'),
 
 	]
 
 	title = models.CharField(max_length=250, verbose_name='Заголовок')
-	slug = models.SlugField(blank=True, null=True, unique = True)
+	slug = models.SlugField(blank=True, null=True, unique=True)
 	article = RichTextUploadingField(verbose_name='Статья')
 	excerpt = models.TextField(blank=True, null=True, verbose_name='Отрывок из статьи')
-	important = models.BooleanField(default = False, verbose_name = 'Важное')
+	important = models.BooleanField(default=False, verbose_name='Важное')
 	language = models.CharField(max_length=15, choices=LANGUAGE, verbose_name='Язык')
 	author = models.ForeignKey(User, default=True, on_delete=models.CASCADE, verbose_name='Автор')
 	created = models.DateTimeField(auto_now_add=True, verbose_name='Создано')
@@ -34,12 +33,10 @@ class News(models.Model):
 	def __str__(self):
 		return self.title 
 
-	
 	def save(self, *args, **kwargs):
 		self.slug = slugify(self.title)
 		self.excerpt = truncatewords(self.article, 35)
 		super(News, self).save(*args, **kwargs)
-
 
 	class Meta:
 		verbose_name = 'Новость'
