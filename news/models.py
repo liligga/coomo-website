@@ -60,7 +60,7 @@ class News(models.Model):
         verbose_name = 'Новость'
         verbose_name_plural = 'Новости'
 
-    def make_thumbnail(self, cover, size=(200,350)):
+    def make_thumbnail(self, cover, size=(200, 350)):
         img = Image.open(cover)
         img.thumbnail(size)
         thumb_io = BytesIO()
