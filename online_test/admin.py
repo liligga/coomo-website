@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import *
+from .models import OnlineTestQuestion, AnswerTest, OnlineTest
 
 
 class QuestionInstanceAdmin(admin.TabularInline):
@@ -13,11 +13,12 @@ class AnswerInstanceAdmin(admin.TabularInline):
 @admin.register(OnlineTest)
 class OnlineTestAdmin(admin.ModelAdmin):
 	list_display = [
-	'id',
-	'name',
-	'part_num',
-	'version',
-	'language',
-	'is_active',
+		'id',
+		'name',
+		'part_num',
+		'version',
+		'language',
+		'is_active',
 	]
+	list_display_links = ['id', 'name']
 	inlines = [QuestionInstanceAdmin, AnswerInstanceAdmin]

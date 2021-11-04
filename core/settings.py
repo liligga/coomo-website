@@ -165,9 +165,16 @@ CORS_ORIGIN_WHITELIST = (
     'http://localhost:3000',
 )
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+#SMTP
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = os.environ.get('EMAIL_HOST')
+EMAIL_PORT = int(os.environ.get('EMAIL_PORT'))
+EMAIL_USE_TLS = bool(os.environ.get('EMAIL_USE_TLS'))
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
 
-DEFAULT_FROM_EMAIL = 'test@test.com'
+
 LOGIN_REDIRECT_URL = '/login_page/'
 LOGIN_URL = '/login_page/'
 
