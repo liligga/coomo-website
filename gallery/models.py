@@ -2,6 +2,7 @@ from django.db import models
 import os
 from django.contrib.auth.models import User
 
+
 def get_upload_to(instance, filename):
 	return os.path.join('gallery', f'{instance.gallery_id.title}', filename)
 
