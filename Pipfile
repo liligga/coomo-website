@@ -23,6 +23,9 @@ pytils = "*"
 django-decorator-include = "*"
 pipfile = "*"
 psycopg2 = "*"
+pandas = "*"
+xlrd = "*"
+openpyxl = "*"
 
 [dev-packages]
 
