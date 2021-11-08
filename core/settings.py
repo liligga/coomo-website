@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'videocourses',
     'menu',
     'online_test',
+    'reports',
 
     # Django
     'django.contrib.admin',
