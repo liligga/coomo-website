@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import *
+from .models import Course, Video
 
 
 class CoursesListSerializer(serializers.ModelSerializer):
@@ -9,7 +9,8 @@ class CoursesListSerializer(serializers.ModelSerializer):
 
 
 class VideoSerializer(serializers.ModelSerializer):
-	course = serializers.RelatedField(source='course.course',read_only=True)
+	course = serializers.RelatedField(source='course.course', read_only=True)
+
 	class Meta:
 		model = Video
 		read_only_fields = ('video_link',)

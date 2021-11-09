@@ -1,7 +1,8 @@
 from django.contrib import admin
 import pandas as pd
 from .forms import ExcelForm
-from .models import *
+from .models import OnlineTestQuestion, AnswerTest, OnlineTest
+
 
 
 class QuestionInstanceAdmin(admin.TabularInline):
@@ -44,3 +45,4 @@ class OnlineTestAdmin(admin.ModelAdmin):
                     answers = AnswerTest.objects.create(onlinetest=obj, question_number=col_contents.values[0],
                                                         correct_answer=col_contents.values[1])
                     answers.save()
+
