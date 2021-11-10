@@ -1,11 +1,24 @@
 from django.contrib import admin
 import pandas as pd
 from .forms import ExcelForm
-from .models import *
+from .models import OnlineTestQuestion, AnswerTest, OnlineTest
+from django.utils.safestring import mark_safe
+
 
 
 class QuestionInstanceAdmin(admin.TabularInline):
-    model = OnlineTestQuestion
+	model = OnlineTestQuestion
+	readonly_fields=['get_image']
+
+	def get_image(self, obj):
+		return mark_safe(f'<img src={obj.question.url} width="200" height="300"')
+
+	get_image.short_description = 'Изображение'
+	fieldsets = (
+		(None, {
+			"fields": (("num_start", "num_end", "question", "get_image"),)
+			}),
+		)
 
 
 class AnswerInstanceAdmin(admin.TabularInline):
@@ -24,6 +37,7 @@ class OnlineTestAdmin(admin.ModelAdmin):
         'language',
         'is_active',
     ]
+	list_display_links = ['id', 'name']
     inlines = [QuestionInstanceAdmin, AnswerInstanceAdmin]
     fieldsets = [
         ('ОНЛАЙН ТЕСТ', {
@@ -44,3 +58,7 @@ class OnlineTestAdmin(admin.ModelAdmin):
                     answers = AnswerTest.objects.create(onlinetest=obj, question_number=col_contents.values[0],
                                                         correct_answer=col_contents.values[1])
                     answers.save()
+
+
+admin.site.site_title="Панель админисратора"
+admin.site.site_header="Панель админисратора"

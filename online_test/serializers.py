@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import *
+from .models import OnlineTestQuestion, OnlineTest
 
 
 class OnlineTestQuestionSerializer(serializers.ModelSerializer):
@@ -9,13 +9,50 @@ class OnlineTestQuestionSerializer(serializers.ModelSerializer):
 
 
 class OnlineTestListSerializer(serializers.ModelSerializer):
-	questions = OnlineTestQuestionSerializer(many = True)
+	questions = OnlineTestQuestionSerializer(many=True)
 
 	class Meta:
 		model = OnlineTest
-		fields = ('name', 'intro', 'part_num', 'version', 'duration', 'num_questions', 'language', 'questions')
+		fields = (
+			'id',
+			'name',
+			'part_num',
+			'version',
+			'duration',
+			'num_questions',
+			'language',
+			'questions')
+
+
+# class OnlineTestDetailSerializer(serializers.ModelSerializer):
+# 	class Meta:
+# 		model = OnlineTest
+# 		fields = (
+# 			'id',
+# 			'name',
+# 			'part_num',
+# 			'version',
+# 			'intro',
+# 			'num_questions',
+# 			'duration',
+# 			'language',
+# 			'questions')
+
+
+# class OnlineTestDetailAndAnswSerializer(serializers.ModelSerializer):
+# 	class Meta:
+# 		model = OnlineTest
+# 		fields = (
+# 			'name',
+# 			'intro',
+# 			'part_num',
+# 			'version',
+# 			'duration',
+# 			'num_questions',
+# 			'language',
+# 			'questions')
+
 
 class AnswerSerializer(serializers.Serializer):
 	number = serializers.IntegerField()
 	answer = serializers.IntegerField()
-

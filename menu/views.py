@@ -1,8 +1,7 @@
 from .serializers import MenuSerializer, FooterSerializer
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics
-from .models import *
-
+from .models import MenuLink, FooterLink
 
 
 class MenuLinksView(generics.ListAPIView):

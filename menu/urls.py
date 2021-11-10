@@ -1,9 +1,8 @@
 from django.urls import path
-from .views import *
-from . import views
+from .views import MenuLinksView, FooterLinksView
 
 
 urlpatterns = [
-	path('api/menu', views.MenuLinksView.as_view(), name='menu_objects'),
-	path('api/footer', views.FooterLinksView.as_view(), name='footer_objects')
+	path('api/menu', MenuLinksView.as_view(), name='menu_objects'),
+	path('api/footer', FooterLinksView.as_view(), name='footer_objects')
 ]
