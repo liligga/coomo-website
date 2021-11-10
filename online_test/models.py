@@ -1,7 +1,5 @@
 from django.db import models
 from ckeditor.fields import RichTextField
-from django.db.models.signals import post_save
-from django.dispatch import receiver
 
 LANGUAGE_CHOICES = [
 	('Ru', 'Русский'),
@@ -87,8 +85,12 @@ class OnlineTestQuestion(models.Model):
 	num_end = models.IntegerField(
 		verbose_name='На каком вопросе заканчивается тест на картинке(номер)')
 
-    def __str__(self):
-        return self.name
+	class Meta:
+		verbose_name = 'Вопрос к тесту'
+		verbose_name_plural = 'Вопросы к тесту'
+
+	def __str__(self):
+		return ''
 
 
 CORRECT_ANS_CHOICES = [

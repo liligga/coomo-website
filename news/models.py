@@ -9,6 +9,8 @@ from django.contrib.auth.models import User
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.db.models.signals import pre_save, post_save
 from PIL import Image
+from io import BytesIO
+from django.core.files import File
 from pytils.translit import slugify
 from django.template.defaultfilters import truncatewords
 from pathlib import Path

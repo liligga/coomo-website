@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'videocourses',
     'menu',
     'online_test',
+    'gallery',
 
     # Django
     'django.contrib.admin',
@@ -164,6 +165,7 @@ REST_FRAMEWORK = {
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:3000',
 )
+
 
 #SMTP
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
