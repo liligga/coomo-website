@@ -37,7 +37,7 @@ class OnlineTestAdmin(admin.ModelAdmin):
         'language',
         'is_active',
     ]
-	list_display_links = ['id', 'name']
+    list_display_links = ['id', 'name']
     inlines = [QuestionInstanceAdmin, AnswerInstanceAdmin]
     fieldsets = [
         ('ОНЛАЙН ТЕСТ', {

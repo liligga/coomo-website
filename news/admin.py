@@ -2,6 +2,7 @@ from django.contrib import admin
 from django import forms
 from .models import *
 from django.utils.safestring import mark_safe
+from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
 
 class NewsAdminForm(forms.ModelForm):
@@ -32,14 +33,14 @@ class NewsAdmin(admin.ModelAdmin):
         })]
 
 class NewsAdmin(admin.ModelAdmin):
-	list_display = ('id', 'slug', 'title', 'language', 'important', 'author', 'created', 'get_cover', 'banners', 'excerpt')
-	list_display_links = ('id', 'title')
-	search_fields = ('title',)
-	list_filter = ('title', 'created')
-	form = NewsAdminForm
+    list_display = ('id', 'slug', 'title', 'language', 'important', 'author', 'created', 'get_cover', 'banners', 'excerpt')
+    list_display_links = ('id', 'title')
+    search_fields = ('title',)
+    list_filter = ('title', 'created')
+    form = NewsAdminForm
 
-	def get_cover(self, obj):
-		return mark_safe(f'<img src={obj.cover.url} width="50" height="60">')
+    def get_cover(self, obj):
+      return mark_safe(f'<img src={obj.cover.url} width="50" height="60">')
 
 
     def save_model(self, request, obj, form, change):
