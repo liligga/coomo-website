@@ -4,7 +4,6 @@ from django.contrib.auth.models import User
 from .models import News
 
 
-
 class NewsSerializer(serializers.Serializer):
 	id = serializers.IntegerField(label='ID')
 	title = serializers.CharField(max_length=250)
@@ -15,7 +14,6 @@ class NewsSerializer(serializers.Serializer):
 	cover = serializers.ImageField()
 	
 
-
 class NewsDetailSerializer(serializers.ModelSerializer):
 	author = serializers.SlugRelatedField(slug_field='username', read_only=True)
 
@@ -24,9 +22,7 @@ class NewsDetailSerializer(serializers.ModelSerializer):
 		fields = '__all__'
 	
 
-
 class SearchNewsSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = News
 		fields = '__all__'
-
