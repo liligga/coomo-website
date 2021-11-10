@@ -6,7 +6,6 @@ from django.core.files import File
 from django.dispatch import receiver
 from pathlib import Path
 from django.contrib.auth.models import User
-# from django.utils.text import slugify
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.db.models.signals import pre_save, post_save
 from PIL import Image
@@ -54,7 +53,7 @@ class News(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
         clean_text = clean_html(self.article)
-        self.excerpt = truncatewords(clean_text, 35)
+        self.excerpt = truncatewords(clean_text, 30)
         if self.banners:
             self.thumbnail = self.make_thumbnail(self.cover)
         super(News, self).save(*args, **kwargs)
@@ -63,7 +62,7 @@ class News(models.Model):
         verbose_name = 'Новость'
         verbose_name_plural = 'Новости'
 
-    def make_thumbnail(self, cover, size=(200,350)):
+    def make_thumbnail(self, cover, size=(200, 350)):
         img = Image.open(cover)
         img.thumbnail(size)
         thumb_io = BytesIO()

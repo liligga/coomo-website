@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 
 def get_upload_to(instance, filename):
-	return os.path.join('gallery', f'{instance.gallery_id.title}', filename)
+	return os.path.join('gallery', f'{instance.gallery_id.id}', filename)
 
 
 class Gallery(models.Model):
@@ -29,7 +29,7 @@ class GalleryImage(models.Model):
 		Gallery,
 		on_delete=models.CASCADE,
 		verbose_name='Имя галлереи',
-		help_text='Выберите к какой галлереи будет приндлажать картинка',
+		help_text='Выберите к какой галлерее будет принадлежать картинки',
 		related_name='photos')
 	photo = models.ImageField(upload_to=get_upload_to, verbose_name='Картинка')
 

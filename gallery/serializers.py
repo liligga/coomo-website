@@ -3,21 +3,21 @@ from .models import Gallery, GalleryImage
 
 
 class GalleryImagesSerializer(serializers.ModelSerializer):
-	photos = serializers.RelatedField(read_only=True, source='gallery.gallery_id')
-
 	class Meta:
 		model = GalleryImage
 		read_only_fields = ('photo',)
-		fields = ('id', 'photo', 'photos')
+		fields = ('id', 'photo')
 
 
+class GalleryListSerializers(serializers.ModelSerializer):
+	cover = serializers.SerializerMethodField()
 
+	class Meta:
+		model = Gallery
+		fields = ['id', 'title', 'cover']
 
-# class GalleryListSerializers(serializers.ModelSerializer):
-
-# 	class Meta:
-# 		model = Gallery
-# 		fields = ['id', 'title']
+	def get_cover(self, obj):
+		return GalleryImagesSerializer(obj.photos.first()).data
 
 
 class GalleryDetailSerilizer(serializers.ModelSerializer):

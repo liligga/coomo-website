@@ -1,6 +1,7 @@
 from django.urls import path
-from .views import CourseDetailView
+from .views import GalleryDetailView, GalleryListView
 
 urlpatterns = [
-	path('api/gallery/<int:pk>', CourseDetailView.as_view(), name='gallery_detail')
+	path('api/gallery_list', GalleryListView.as_view(), name='gallery_list'),
+	path('api/gallery/<int:pk>', GalleryDetailView.as_view(), name='gallery_detail'),
 ]

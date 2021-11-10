@@ -1,7 +1,6 @@
 from django.db import models
 from ckeditor.fields import RichTextField
 
-
 LANGUAGE_CHOICES = [
 	('Ru', 'Русский'),
 	('Kg', 'Кыргызский'),
@@ -62,6 +61,16 @@ class OnlineTest(models.Model):
 	def __str__(self):
 		return self.name
 
+class OnlineTest(models.Model):
+    name = models.CharField(max_length=50, verbose_name='Предмет')
+    part_num = models.IntegerField(default=1, verbose_name='Часть')
+    version = models.IntegerField(default=1, verbose_name='Вариант')
+    duration = models.IntegerField(verbose_name='Время (в минутах)')
+    num_questions = models.IntegerField(verbose_name='Количество вопросов')
+    num_answers = models.IntegerField(verbose_name='Количество вариантов ответа')
+    language = models.CharField(max_length=15, default='Ru', choices=LANGUAGE_CHOICES, verbose_name='Язык теста')
+    is_active = models.BooleanField(default=True, verbose_name='Опубликован')
+    intro = RichTextField(verbose_name='Приветственный текст')
 
 class OnlineTestQuestion(models.Model):
 	onlinetest = models.ForeignKey(
@@ -85,30 +94,24 @@ class OnlineTestQuestion(models.Model):
 
 
 CORRECT_ANS_CHOICES = [
-	(1, 'А'),
-	(2, 'Б'),
-	(3, 'В'),
-	(4, 'Г'),
-	(5, 'Д'),
-	(6, 'Е'),
+    ('А', 'А'),
+    ('Б', 'Б'),
+    ('В', 'В'),
+    ('Г', 'Г'),
+    ('Д', 'Д'),
+    ('Е', 'Е'),
 ]
 
 
 class AnswerTest(models.Model):
-	onlinetest = models.ForeignKey(
-		OnlineTest,
-		on_delete=models.CASCADE,
-		related_name='answers')
-	question_number = models.IntegerField(verbose_name='Номер вопроса')
-	correct_answer = models.IntegerField(
-		default=1,
-		choices=CORRECT_ANS_CHOICES,
-		verbose_name='Правильный ответ')
+    onlinetest = models.ForeignKey(OnlineTest, on_delete=models.CASCADE, related_name='answers')
+    question_number = models.IntegerField(verbose_name='Номер вопроса', blank=True)
+    correct_answer = models.CharField(default='А', choices=CORRECT_ANS_CHOICES, verbose_name='Правильный ответ',
+                                      max_length=2, blank=True)
 
-	class Meta:
-		verbose_name = 'Ответ к тесту'
-		verbose_name_plural = 'Ответы к тесту'
+    class Meta:
+        verbose_name = 'Ответ к тесту'
+        verbose_name_plural = 'Ответы к тесту'
 
-	def __str__(self):
-		return f'Вопрос номер {self.question_number}'
-
+    def __str__(self):
+        return self.onlinetest.name
