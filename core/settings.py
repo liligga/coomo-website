@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'videocourses',
     'menu',
     'online_test',
+    'reports',
+    'gallery',
 
     # Django
     'django.contrib.admin',
@@ -77,8 +79,7 @@ ROOT_URLCONF = 'core.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
-        ,
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -166,9 +167,17 @@ CORS_ORIGIN_WHITELIST = (
     'http://localhost:3000',
 )
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-DEFAULT_FROM_EMAIL = 'test@test.com'
+#SMTP
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = os.environ.get('EMAIL_HOST')
+EMAIL_PORT = int(os.environ.get('EMAIL_PORT'))
+EMAIL_USE_TLS = bool(os.environ.get('EMAIL_USE_TLS'))
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
+
+
 LOGIN_REDIRECT_URL = '/login_page/'
 LOGIN_URL = '/login_page/'
 
