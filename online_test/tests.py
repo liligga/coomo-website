@@ -52,7 +52,7 @@ class TestOnlineTest(APITestCase):
 		)
 
 	def test_online_test_list(self):
-		response = self.client.get(reverse('tests_list'))
+		response = self.client.get(reverse('onlinetest-list'))
 		self.assertEqual(response.status_code, status.HTTP_200_OK)
 		self.assertEqual(len(response.data), 4)
 		self.assertTrue([{

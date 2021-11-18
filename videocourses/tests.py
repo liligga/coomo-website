@@ -11,10 +11,6 @@ class TestCourse(APITestCase):
 			name='Test Course',
 			description='Test description',
 			lang_course='Ru')
-		self.test_course_en = Course.objects.create(
-			name='Test Course English',
-			description='Test description english',
-			lang_course='En')
 		self.test_course_kg = Course.objects.create(
 			name='Test Course Kyrgyz',
 			description='Test description kyrgyz',
@@ -28,7 +24,7 @@ class TestCourse(APITestCase):
 	def test_course_list(self):
 		response = self.client.get(reverse('course_list'))
 		self.assertEqual(response.status_code, status.HTTP_200_OK)
-		self.assertEqual(len(response.data), 3)
+		self.assertEqual(len(response.data), 2)
 		self.assertTrue(
 			{'id': 1,
 				'name': 'Test Course',
@@ -43,15 +39,6 @@ class TestCourse(APITestCase):
 		self.assertEqual(response.status_code, status.HTTP_200_OK)
 		self.assertEqual(serializer_data, response.data)
 
-	def test_course_list_filtered_en(self):
-		response = self.client.get(reverse('course_list') + '?lang_course=En')
-		self.assertEqual(response.status_code, status.HTTP_200_OK)
-		self.assertEqual(len(response.data), 1)
-		self.assertTrue(
-			{'id': 2,
-				'name': 'Test Course English',
-				'description': 'Test description english',
-				'lang_course': 'En'}) in response.json()
 
 	def test_course_list_filtered_kg(self):
 		response = self.client.get(reverse('course_list') + '?lang_course=Kg')

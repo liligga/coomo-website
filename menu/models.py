@@ -16,8 +16,8 @@ class MenuLink(models.Model):
 	title = models.CharField(max_length=100)
 	is_active = models.BooleanField(default=False)
 	link = models.URLField(max_length=200)
-	icon = models.ImageField(
-		upload_to='media/icons_menu',
+	icon = models.FileField(
+		upload_to='icons_menu',
 		unique=True,
 		help_text="Добавлять только картинки размера 25х25")
 	lang_menu_link = models.CharField(

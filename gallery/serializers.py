@@ -1,12 +1,10 @@
 from rest_framework import serializers
 from .models import Gallery, GalleryImage
+# from .views import GalleryDetailView
 
 
-class GalleryImagesSerializer(serializers.ModelSerializer):
-	class Meta:
-		model = GalleryImage
-		read_only_fields = ('photo',)
-		fields = ('id', 'photo')
+class GalleryImagesSerializer(serializers.Serializer):
+	photo = serializers.ImageField(use_url=False)
 
 
 class GalleryListSerializers(serializers.ModelSerializer):
@@ -14,15 +12,13 @@ class GalleryListSerializers(serializers.ModelSerializer):
 
 	class Meta:
 		model = Gallery
-		fields = ['id', 'title', 'cover']
+		fields = ('id', 'title', 'cover')
 
 	def get_cover(self, obj):
 		return GalleryImagesSerializer(obj.photos.first()).data
 
 
-class GalleryDetailSerilizer(serializers.ModelSerializer):
-	photos = GalleryImagesSerializer(read_only=True, many=True)
-
-	class Meta:
-		model = Gallery
-		fields = ('id', 'title', 'description', 'photos')
+class GalleryDetailSerilizer(serializers.Serializer):
+	title = serializers.CharField()
+	description = serializers.CharField()
+	photos_gallery = GalleryImagesSerializer(source='photos', many=True)
