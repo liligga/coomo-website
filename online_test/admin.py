@@ -5,20 +5,19 @@ from .models import OnlineTestQuestion, AnswerTest, OnlineTest
 from django.utils.safestring import mark_safe
 
 
-
 class QuestionInstanceAdmin(admin.TabularInline):
-	model = OnlineTestQuestion
-	readonly_fields=['get_image']
+    model = OnlineTestQuestion
+    readonly_fields = ['get_image']
 
-	def get_image(self, obj):
-		return mark_safe(f'<img src={obj.question.url} width="200" height="300"')
+    def get_image(self, obj):
+        return mark_safe(f'<img src={obj.question.url} width="200" height="300"')
 
-	get_image.short_description = 'Изображение'
-	fieldsets = (
-		(None, {
-			"fields": (("num_start", "num_end", "question", "get_image"),)
-			}),
-		)
+    get_image.short_description = 'Изображение'
+    fieldsets = (
+        (None, {
+            "fields": (("num_start", "num_end", "question", "get_image"),)
+        }),
+    )
 
 
 class AnswerInstanceAdmin(admin.TabularInline):
@@ -48,17 +47,18 @@ class OnlineTestAdmin(admin.ModelAdmin):
          ),
     ]
 
-    def save_model(self, request, obj, form, change):
-        file = request.FILES.get('excel_file')
-        obj.save()
-        if file:
-            answers = pd.read_excel(file)
-            for col_n, col_contents in answers.iteritems():
-                if str(col_contents.values[0]).isdigit():
-                    answers = AnswerTest.objects.create(onlinetest=obj, question_number=col_contents.values[0],
-                                                        correct_answer=col_contents.values[1])
-                    answers.save()
+
+def save_model(self, request, obj, form, change):
+    file = request.FILES.get('excel_file')
+    obj.save()
+    if file:
+        answers = pd.read_excel(file)
+        for col_n, col_contents in answers.iteritems():
+            if str(col_contents.values[0]).isdigit():
+                answers = AnswerTest.objects.create(onlinetest=obj, question_number=col_contents.values[0],
+                                                    correct_answer=col_contents.values[1])
+                answers.save()
 
 
-admin.site.site_title="Панель админисратора"
-admin.site.site_header="Панель админисратора"
+admin.site.site_title = "Панель админисратора"
+admin.site.site_header = "Панель админисратора"

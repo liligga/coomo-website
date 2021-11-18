@@ -43,7 +43,6 @@ class News(models.Model):
     updated = models.DateTimeField(auto_now=True, verbose_name='Обновлено')
     cover = models.ImageField(upload_to='news', blank=True, verbose_name='Обложка')
     banners = models.BooleanField(default=False, verbose_name='Баннер')
-    thumbnail = models.ImageField(upload_to='news', blank=True, null=True, help_text='Заполняется автоматически', verbose_name='Баннер новости')
     parent = models.ForeignKey('self', verbose_name='Родительская новость', on_delete=models.SET_NULL, blank=True,
                                null=True, related_name='news', )
 
@@ -54,21 +53,11 @@ class News(models.Model):
         self.slug = slugify(self.title)
         clean_text = clean_html(self.article)
         self.excerpt = truncatewords(clean_text, 30)
-        if self.banners:
-            self.thumbnail = self.make_thumbnail(self.cover)
         super(News, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name = 'Новость'
         verbose_name_plural = 'Новости'
-
-    def make_thumbnail(self, cover, size=(200, 350)):
-        img = Image.open(cover)
-        img.thumbnail(size)
-        thumb_io = BytesIO()
-        img.save(thumb_io, 'JPEG', quality=85)
-        thumbnail = File(thumb_io, name=cover.name)
-        return thumbnail
 
 
 def news_pre_save(sender, instance, *args, **kwargs):
