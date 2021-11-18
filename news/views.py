@@ -1,10 +1,8 @@
-from rest_framework.generics import ListAPIView, RetrieveAPIView
+from rest_framework.generics import RetrieveAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework import generics
-from rest_framework import filters
 from .models import *
-from .serializers import NewsSerializer, NewsDetailSerializer, SearchNewsSerializer
+from .serializers import NewsSerializer, NewsDetailSerializer
 from menu.models import MenuLink
 from menu.serializers import MenuSerializer
 
@@ -56,13 +54,6 @@ class NewsView(APIView):
 #         return Response(context)
 
 
-class SearchView(ListAPIView):
-    filter_backends = (filters.SearchFilter,)
-    search_fields = ['title', 'article']
-    queryset = News.objects.all()
-    serializer_class = SearchNewsSerializer
-
-
 class NewsDetailAPIView(RetrieveAPIView):
     queryset = News.objects.all()
     serializer_class = NewsDetailSerializer
@@ -75,4 +66,3 @@ class NewsDetailAPIView(RetrieveAPIView):
         four_last_news = NewsDetailSerializer(four_last_news, many=True)
 
         return Response({'current_news': current_news.data, 'related': four_last_news.data})
-

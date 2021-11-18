@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'online_test',
     'reports',
     'gallery',
+    'search',
 
     # Django
     'django.contrib.admin',

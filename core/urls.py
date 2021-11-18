@@ -46,6 +46,7 @@ urlpatterns = [
     path('', include('online_test.urls')),
     path('', include('reports.urls')),
     path('', include('gallery.urls')),
+    path('', include('search.urls')),
     path('admin/', decorator_include(login_required, admin.site.urls), name='admin'),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('login_page/', login_page, name='login_page'),

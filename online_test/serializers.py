@@ -3,25 +3,25 @@ from .models import OnlineTestQuestion, OnlineTest
 
 
 class OnlineTestQuestionSerializer(serializers.ModelSerializer):
-	class Meta:
-		model = OnlineTestQuestion
-		fields = ('question',)
+    class Meta:
+        model = OnlineTestQuestion
+        fields = ('question',)
 
 
 class OnlineTestListSerializer(serializers.ModelSerializer):
-	questions = OnlineTestQuestionSerializer(many=True)
+    questions = OnlineTestQuestionSerializer(many=True)
 
-	class Meta:
-		model = OnlineTest
-		fields = (
-			'id',
-			'name',
-			'part_num',
-			'version',
-			'duration',
-			'num_questions',
-			'language',
-			'questions')
+    class Meta:
+        model = OnlineTest
+        fields = (
+            'id',
+            'name',
+            'part_num',
+            'version',
+            'duration',
+            'num_questions',
+            'language',
+            'questions')
 
 
 # class OnlineTestDetailSerializer(serializers.ModelSerializer):
@@ -54,5 +54,5 @@ class OnlineTestListSerializer(serializers.ModelSerializer):
 
 
 class AnswerSerializer(serializers.Serializer):
-	number = serializers.IntegerField()
-	answer = serializers.IntegerField()
+    number = serializers.IntegerField()
+    answer = serializers.IntegerField()
