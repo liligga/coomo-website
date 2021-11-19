@@ -5,7 +5,8 @@ from rest_framework.response import Response
 from .models import OnlineTest
 from rest_framework.views import APIView
 from django.http import Http404
-from .serializers import OnlineTestListSerializer
+from .serializers import OnlineTestListSerializer, AnswerSerializer
+
 
 
 class OnlineTestViewSet(viewsets.ReadOnlyModelViewSet):
@@ -34,5 +35,3 @@ class OnlineTestViewSet(viewsets.ReadOnlyModelViewSet):
 			{'status': 'OK',
 				'number_of_correct_answers': total,
 				'errors': serializer.errors})
-
-
