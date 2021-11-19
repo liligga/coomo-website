@@ -37,17 +37,15 @@ class OnlineTestAdmin(admin.ModelAdmin):
         'is_active',
     ]
     list_display_links = ['id', 'name']
-
-
-inlines = [QuestionInstanceAdmin, AnswerInstanceAdmin]
-fieldsets = [
-    ('ОНЛАЙН ТЕСТ', {
-        'fields': (
-            'name', 'part_num', 'version', 'duration', 'num_questions', 'num_answers', 'language', 'is_active',
-            'intro', 'excel',)
-    }
-     ),
-]
+    inlines = [QuestionInstanceAdmin, AnswerInstanceAdmin]
+    fieldsets = [
+        ('ОНЛАЙН ТЕСТ', {
+            'fields': (
+                'name', 'part_num', 'version', 'duration', 'num_questions', 'num_answers', 'language', 'is_active',
+                'intro', 'excel',)
+        }
+         ),
+    ]
 
 
 def save_model(self, request, obj, form, change):

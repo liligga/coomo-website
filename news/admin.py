@@ -2,8 +2,10 @@ from django.contrib import admin
 from django import forms
 from .models import *
 from django.utils.safestring import mark_safe
+from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
 
+admin.site.register(News)
 class NewsAdmin(admin.ModelAdmin):
     list_display = ('id', 'language', 'title', 'important', 'created')
     list_display_links = ('id', 'title')
@@ -22,9 +24,8 @@ class NewsAdmin(admin.ModelAdmin):
         ('Другие возможности', {
             'fields': ('banners',),
             'description': '<strong>Использовать эту новость как баннер на главной</strong>'
-        })
+        })]
 
-    ]
 
     def save_model(self, request, obj, form, change):
         obj.author = request.user
@@ -37,4 +38,3 @@ class NewsAdmin(admin.ModelAdmin):
     get_cover.short_description = 'Изображение'
 
 
-admin.site.register(News, NewsAdmin)

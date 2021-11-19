@@ -39,3 +39,6 @@ class GalleryImage(models.Model):
 
 	def __str__(self):
 		return ''
+
+	def photo_url(self):
+		return self.photo.url
