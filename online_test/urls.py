@@ -8,5 +8,4 @@ router.register(r'tests', OnlineTestViewSet)
 
 urlpatterns = [
 	path('api/', include(router.urls)),
-
 ]
