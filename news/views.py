@@ -26,13 +26,13 @@ class NewsView(APIView):
 
 
 class NewsDetailAPIView(RetrieveAPIView):
-	queryset = News.objects.all()
-	serializer_class = NewsDetailSerializer
-	lookup_field = 'slug'
+    queryset = News.objects.all()
+    serializer_class = NewsDetailSerializer
+    lookup_field = 'slug'
 
-	def retrieve(self, request, *args, **kwargs):
-		current = News.objects.get(slug=kwargs.get('slug')).news
-		current_news = NewsDetailSerializer(current, many=True)
-		four_last_news = News.objects.all().order_by('-id')[:4]
-		four_last_news = NewsDetailSerializer(four_last_news, many=True)
-		return Response({'current_news': current_news.data, 'related': four_last_news.data})
+    def retrieve(self, request, *args, **kwargs):
+        current = News.objects.get(slug=kwargs.get('slug')).news
+        current_news = NewsDetailSerializer(current, many=True)
+        four_last_news = News.objects.all().order_by('-id')[:4]
+        four_last_news = NewsDetailSerializer(four_last_news, many=True)
+        return Response({'current_news': current_news.data, 'related': four_last_news.data})
