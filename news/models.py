@@ -32,25 +32,37 @@ class News(models.Model):
         ('Kg', 'Кыргызский'),
     ]
 
-    title = models.CharField(max_length=250, verbose_name='Заголовок')
-    slug = models.SlugField(blank=True, null=True, unique=True)
+    title = models.CharField(max_length=500, verbose_name='Заголовок')
+    slug = models.SlugField(max_length=500, blank=True, null=True, unique=True)
     article = RichTextUploadingField(verbose_name='Статья')
     excerpt = models.TextField(blank=True, null=True, verbose_name='Отрывок из статьи')
     important = models.BooleanField(default=False, verbose_name='Важное')
-    language = models.CharField(max_length=15, choices=LANGUAGE, verbose_name='Язык', default='Ru')
+    lang = models.CharField(
+        max_length=15,
+        choices=LANGUAGE,
+        verbose_name='Язык',
+        default='Ru')
     author = models.ForeignKey(User, default=True, on_delete=models.CASCADE, verbose_name='Автор')
     created = models.DateTimeField(auto_now_add=True, verbose_name='Создано')
     updated = models.DateTimeField(auto_now=True, verbose_name='Обновлено')
-    cover = models.ImageField(upload_to='news', blank=True, verbose_name='Обложка')
+    cover = models.ImageField(
+        upload_to='news',
+        blank=True,
+        verbose_name='Обложка')
     banners = models.BooleanField(default=False, verbose_name='Баннер')
-    parent = models.ForeignKey('self', verbose_name='Родительская новость', on_delete=models.SET_NULL, blank=True,
-                               null=True, related_name='news', )
+    parent = models.ForeignKey(
+        'self',
+        verbose_name='Родительская новость',
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+        related_name='news')
 
     def __str__(self):
         return self.title
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.title)
+        self.slug = slugify(self.title) + str(self.id)
         clean_text = clean_html(self.article)
         self.excerpt = truncatewords(clean_text, 30)
         super(News, self).save(*args, **kwargs)
@@ -58,6 +70,15 @@ class News(models.Model):
     class Meta:
         verbose_name = 'Новость'
         verbose_name_plural = 'Новости'
+
+    def make_thumbnail(self, cover, size=(200, 350)):
+        img = Image.open(cover)
+        img.thumbnail(size)
+        thumb_io = BytesIO()
+        img.save(thumb_io, 'JPEG', quality=85)
+        thumbnail = File(thumb_io, name=cover.name)
+        return thumbnail
+
 
 
 def news_pre_save(sender, instance, *args, **kwargs):

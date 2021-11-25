@@ -35,8 +35,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = os.environ.get('DEBUG')
 
 # TODO: выставить разрешенные айпи при деплое на сервер
-ALLOWED_HOSTS = ['localhost', 'http://localhost:3000', '127.0.0.1', ]
-ALLOWED_HOSTS.append(os.environ.get('ALLOWED_HOSTS'))
+ALLOWED_HOSTS = ['localhost', 'http://localhost:3000', '127.0.0.1'] + os.environ.get('ALLOWED_HOSTS').split(',')
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -197,13 +197,6 @@ CKEDITOR_IMAGE_QUALITY = 60
 CKEDITOR_BROWSE_SHOW_DIRS = True
 CKEDITOR_ALLOW_NONIMAGE_FILES = True
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = os.environ.get('EMAIL_HOST')
-EMAIL_PORT = int(os.environ.get('EMAIL_PORT'))
-EMAIL_USE_TLS = bool(os.environ.get('EMAIL_USE_TLS'))
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
-DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
 
 CKEDITOR_CONFIGS = {
     'default': {

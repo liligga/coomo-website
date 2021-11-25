@@ -6,18 +6,16 @@ class GalleryImagesSerializer(serializers.Serializer):
 	photo = serializers.ImageField(use_url=False)
 
 
-class GalleryListSerializers(serializers.ModelSerializer):
+class GalleryListSerializers(serializers.Serializer):
+	id = serializers.IntegerField(read_only=True)
+	title = serializers.CharField()
 	cover = serializers.SerializerMethodField()
 
 	def get_cover(self, obj):
 		return GalleryImagesSerializer(obj.photos.first()).data['photo']
 
-	class Meta:
-		model = Gallery
-		fields = ('id', 'title', 'cover')
-
 
 class GalleryDetailSerilizer(serializers.Serializer):
+	id = serializers.IntegerField(read_only=True)
 	title = serializers.CharField()
-	description = serializers.CharField()
 	photos_gallery = GalleryImagesSerializer(source='photos', many=True)

@@ -7,14 +7,14 @@ from .models import MenuLink, FooterLink
 class MenuLinksView(generics.ListAPIView):
 	serializer_class = MenuSerializer
 	filter_backends = [DjangoFilterBackend]
-	filterset_fields = ['lang_menu_link']
+	filterset_fields = ['lang']
 
 	def get_queryset(self):
-		query = self.request.query_params.get('lang_menu_link')
+		query = self.request.query_params.get('lang')
 		if query:
-			queryset = MenuLink.active_objects.filter(lang_menu_link=query)
+			queryset = MenuLink.active_objects.filter(lang=query)
 		else:
-			queryset = MenuLink.active_objects.filter(lang_menu_link='Ru')
+			queryset = MenuLink.active_objects.filter(lang='Ru')
 
 		return queryset
 
@@ -22,13 +22,13 @@ class MenuLinksView(generics.ListAPIView):
 class FooterLinksView(generics.ListAPIView):
 	serializer_class = FooterSerializer
 	filter_backends = [DjangoFilterBackend]
-	filterset_fields = ['lang_footer_link']
+	filterset_fields = ['lang']
 
 	def get_queryset(self):
-		query = self.request.query_params.get('lang_footer_link')
+		query = self.request.query_params.get('lang')
 		if query:
-			queryset = FooterLink.active_objects.filter(lang_footer_link=query)
+			queryset = FooterLink.active_objects.filter(lang=query)
 		else:
-			queryset = FooterLink.active_objects.filter(lang_footer_link='Ru')\
+			queryset = FooterLink.active_objects.filter(lang='Ru')\
 
 		return queryset
