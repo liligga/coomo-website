@@ -13,7 +13,7 @@ class TestOnlineTest(APITestCase):
 			duration=60,
 			num_questions=15,
 			num_answers=6,
-			language='Ru',
+			lang='Ru',
 			is_active=True,
 			intro='Test Text'
 		)
@@ -24,7 +24,7 @@ class TestOnlineTest(APITestCase):
 			duration=60,
 			num_questions=15,
 			num_answers=6,
-			language='Ru',
+			lang='Ru',
 			is_active=True,
 			intro='Test Text'
 		)
@@ -35,7 +35,7 @@ class TestOnlineTest(APITestCase):
 			duration=80,
 			num_questions=25,
 			num_answers=6,
-			language='Kg',
+			lang='Kg',
 			is_active=True,
 			intro='Test Text'
 		)
@@ -46,7 +46,7 @@ class TestOnlineTest(APITestCase):
 			duration=80,
 			num_questions=25,
 			num_answers=6,
-			language='Kg',
+			lang='Kg',
 			is_active=False,
 			intro='Test Text'
 		)
@@ -62,7 +62,7 @@ class TestOnlineTest(APITestCase):
 			'version': 1,
 			'duration': 60,
 			'num_answers': 6,
-			'language': 'Ru',
+			'lang': 'Ru',
 			'is_active': True,
 			'intro': 'Test Text'
 		}, {
@@ -72,7 +72,7 @@ class TestOnlineTest(APITestCase):
 			'version': 2,
 			'duration': 60,
 			'num_answers': 6,
-			'language': 'Ru',
+			'lang': 'Ru',
 			'is_active': True,
 			'intro': 'Test Text'
 		}, {
@@ -82,7 +82,7 @@ class TestOnlineTest(APITestCase):
 			'version': 3,
 			'duration': 80,
 			'num_answers': 6,
-			'language': 'Kg',
+			'lang': 'Kg',
 			'is_active': True,
 			'intro': 'Test Text'
 		}, {
@@ -92,6 +92,6 @@ class TestOnlineTest(APITestCase):
 			'version': 3,
 			'duration': 80,
 			'num_answers': 6,
-			'language': 'Kg',
+			'lang': 'Kg',
 			'is_active': False,
 			'intro': 'Test Text'}])

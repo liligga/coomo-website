@@ -10,16 +10,16 @@ class TestCourse(APITestCase):
 		self.test_course = Course.objects.create(
 			name='Test Course',
 			description='Test description',
-			lang_course='Ru')
+			lang='Ru')
 		self.test_course_kg = Course.objects.create(
 			name='Test Course Kyrgyz',
 			description='Test description kyrgyz',
-			lang_course='Kg')
+			lang='Kg')
 		self.test_video = Video.objects.create(
 			course=self.test_course,
 			name='test_name',
 			video_link='https://www.test_link.ru',
-			lang_video='Ru')
+			lang='Ru')
 
 	def test_course_list(self):
 		response = self.client.get(reverse('course_list'))
@@ -29,7 +29,11 @@ class TestCourse(APITestCase):
 			{'id': 1,
 				'name': 'Test Course',
 				'description': 'Test description',
-				'lang_course': 'Ru'}) in response.json()
+				'lang': 'Ru'},
+			{'id': 2,
+				'name': 'Test Course Kyrgyz',
+				'description': 'Test description kyrgyz',
+				'lang': 'Kg'}) in response.json()
 
 	def test_course_detail(self):
 		response = self.client.get(reverse(
@@ -38,14 +42,3 @@ class TestCourse(APITestCase):
 		serializer_data = CourseDetailSerializer(self.test_course).data
 		self.assertEqual(response.status_code, status.HTTP_200_OK)
 		self.assertEqual(serializer_data, response.data)
-
-
-	def test_course_list_filtered_kg(self):
-		response = self.client.get(reverse('course_list') + '?lang_course=Kg')
-		self.assertEqual(response.status_code, status.HTTP_200_OK)
-		self.assertEqual(len(response.data), 1)
-		self.assertTrue(
-			{'id': 3,
-				'name': 'Test Course Kyrgyz',
-				'description': 'Test description kyrgyz',
-				'lang_course': 'Kg'}) in response.json()

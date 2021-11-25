@@ -33,7 +33,7 @@ class OnlineTestAdmin(admin.ModelAdmin):
         'name',
         'part_num',
         'version',
-        'language',
+        'lang',
         'is_active',
     ]
     list_display_links = ['id', 'name']
@@ -41,7 +41,7 @@ class OnlineTestAdmin(admin.ModelAdmin):
     fieldsets = [
         ('ОНЛАЙН ТЕСТ', {
             'fields': (
-                'name', 'part_num', 'version', 'duration', 'num_questions', 'num_answers', 'language', 'is_active',
+                'name', 'part_num', 'version', 'duration', 'num_questions', 'num_answers', 'lang', 'is_active',
                 'intro', 'excel',)
         }
          ),
@@ -60,5 +60,5 @@ def save_model(self, request, obj, form, change):
                 answers.save()
 
 
-admin.site.site_title = "Панель админисратора"
-admin.site.site_header = "Панель админисратора"
+admin.site.site_title = "Панель администратора"
+admin.site.site_header = "Панель администратора"
