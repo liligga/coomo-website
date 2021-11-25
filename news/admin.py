@@ -19,7 +19,7 @@ class NewsAdmin(admin.ModelAdmin):
             'description': '<p>Укажите <strong>главную новость</strong>, если эта является ее переводом</p>'
         },),
         ('Создание новости', {
-            'fields': ('title', 'article', 'important', 'language', 'cover')
+            'fields': ('title', 'article', 'important', 'lang', 'cover')
         },),
         ('Другие возможности', {
             'fields': ('banners',),
