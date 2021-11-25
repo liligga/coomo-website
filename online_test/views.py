@@ -14,7 +14,7 @@ class OnlineTestViewSet(viewsets.ReadOnlyModelViewSet):
 	serializer_class = OnlineTestListSerializer
 	filter_backends = [DjangoFilterBackend]
 	filterset_fields = [
-		'language',
+		'lang',
 		'part_num',
 		'version',
 		'num_questions',

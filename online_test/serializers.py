@@ -20,7 +20,7 @@ class OnlineTestListSerializer(serializers.ModelSerializer):
             'version',
             'duration',
             'num_questions',
-            'language',
+            'lang',
             'questions')
         
 

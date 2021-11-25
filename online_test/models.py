@@ -45,7 +45,7 @@ class OnlineTest(models.Model):
     duration = models.IntegerField(verbose_name='Время (в минутах)')
     num_questions = models.IntegerField(verbose_name='Количество вопросов')
     num_answers = models.IntegerField(verbose_name='Количество вариантов ответа')
-    language = models.CharField(
+    lang = models.CharField(
         max_length=15,
         default='Ru',
         choices=LANGUAGE_CHOICES,
