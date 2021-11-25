@@ -40,7 +40,7 @@ class OnlineTest(models.Model):
     part_num = models.IntegerField(
         verbose_name='Часть',
         choices=PART_NUMBERS,
-        blank=True)
+        blank=True, null=True)
     version = models.IntegerField(default=1, verbose_name='Вариант')
     duration = models.IntegerField(verbose_name='Время (в минутах)')
     num_questions = models.IntegerField(verbose_name='Количество вопросов')
