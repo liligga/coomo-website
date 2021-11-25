@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import OnlineTestQuestion, OnlineTest
+from .models import OnlineTestQuestion, OnlineTest, AnswerTest
 
 
 class OnlineTestListSerializer(serializers.ModelSerializer):
