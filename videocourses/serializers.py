@@ -5,7 +5,7 @@ from .models import Course, Video
 class CoursesListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Course
-        fields = ('name', 'description', 'lang_course')
+        fields = ('id', 'name', 'description', 'lang')
 
 
 class VideoSerializer(serializers.ModelSerializer):
@@ -14,7 +14,7 @@ class VideoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Video
         read_only_fields = ('video_link',)
-        fields = ('name', 'video_link', 'course')
+        fields = ('id', 'name', 'video_link', 'course')
 
 
 class CourseDetailSerializer(serializers.ModelSerializer):
@@ -22,4 +22,4 @@ class CourseDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Course
-        fields = ('name', 'description', 'lang_course', 'videos')
+        fields = ('name', 'lang', 'videos')

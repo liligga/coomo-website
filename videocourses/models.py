@@ -11,7 +11,7 @@ LANGUAGE_CHOICES = [
 class Course(models.Model):
 	name = models.CharField(max_length=100, verbose_name='Название курса')
 	description = models.TextField(unique=True, verbose_name='Описание курса')
-	lang_course = models.CharField(
+	lang = models.CharField(
 		default="Ru",
 		choices=LANGUAGE_CHOICES,
 		max_length=15,
@@ -36,8 +36,12 @@ class Video(models.Model):
 		max_length=150,
 		unique=True,
 		blank=True,
-		verbose_name='Ссылка на видео')
-	lang_video = models.CharField(
+		verbose_name='Ссылка на видео',
+		error_messages ={
+			"unique":"Ссылка на видео не должна совпадать с другими."
+		}
+		)
+	lang = models.CharField(
 		default='Ru',
 		choices=LANGUAGE_CHOICES,
 		max_length=15,

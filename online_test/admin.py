@@ -60,5 +60,5 @@ def save_model(self, request, obj, form, change):
                 answers.save()
 
 
-admin.site.site_title = "Панель админисратора"
-admin.site.site_header = "Панель админисратора"
+admin.site.site_title = "Панель администратора"
+admin.site.site_header = "Панель администратора"

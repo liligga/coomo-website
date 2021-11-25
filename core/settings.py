@@ -31,7 +31,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = os.environ.get('DEBUG')
 
 # TODO: выставить разрешенные айпи при деплое на сервер
-ALLOWED_HOSTS = ['localhost', 'http://localhost:3000', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', 'http://localhost:3000', '127.0.0.1'] + os.environ.get('ALLOWED_HOSTS').split(',')
 
 # Application definition
 
@@ -67,6 +67,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
