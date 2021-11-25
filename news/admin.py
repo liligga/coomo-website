@@ -7,7 +7,7 @@ from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
 @admin.register(News)
 class NewsAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'lang', 'important', 'created')
+    list_display = ('id', 'title', 'language', 'important', 'created')
     list_display_links = ('id', 'title')
     search_fields = ('title',)
     list_filter = ('id', 'title', 'created')
@@ -26,7 +26,6 @@ class NewsAdmin(admin.ModelAdmin):
             'description': '<strong>Использовать эту новость как баннер на главной</strong>'
         })]
 
-
     def save_model(self, request, obj, form, change):
         obj.author = request.user
         super().save_model(request, obj, form, change)
@@ -36,5 +35,3 @@ class NewsAdmin(admin.ModelAdmin):
             return mark_safe(f'<img src={obj.cover.url} width="50" height="60">')
 
     get_cover.short_description = 'Изображение'
-
-

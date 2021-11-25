@@ -14,8 +14,14 @@ from pathlib import Path
 #Переводы
 from django.utils.translation import gettext_lazy as _
 
+
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+
 # Загрузка .env
 from dotenv import load_dotenv
+load_dotenv(f'{BASE_DIR}/staging.env')
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -38,11 +44,11 @@ ALLOWED_HOSTS = ['localhost', 'http://localhost:3000', '127.0.0.1'] + os.environ
 INSTALLED_APPS = [
 
     # Apps
-    'news',
     'authentication',
     'videocourses',
     'menu',
     'online_test',
+    'news',
     'reports',
     'gallery',
     'search',
@@ -106,9 +112,10 @@ DATABASES = {
         'USER': os.environ.get('USER'),
         'PASSWORD': os.environ.get('PASSWORD'),
         'HOST': os.environ.get('HOST'),
-        'PORT': os.environ.get('PORT')
+        'PORT': '',
     }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -165,9 +172,10 @@ REST_FRAMEWORK = {
 }
 
 # CORS
-CORS_ORIGIN_WHITELIST = (
+CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
-)
+]
+CORS_ORIGIN_WHITELIST.append('http://' + os.environ.get('ALLOWED_HOSTS'))
 
 
 #SMTP
@@ -190,6 +198,7 @@ CKEDITOR_THUMBNAIL_SIZE = (300, 300)
 CKEDITOR_IMAGE_QUALITY = 60
 CKEDITOR_BROWSE_SHOW_DIRS = True
 CKEDITOR_ALLOW_NONIMAGE_FILES = True
+
 
 CKEDITOR_CONFIGS = {
     'default': {

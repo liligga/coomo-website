@@ -31,10 +31,16 @@ sqlparse = "==0.4.1"
 Django = "==3.2"
 Pillow = "==8.2.0"
 django-ckeditor = "*"
+django-filter = "*"
+python-dotenv = "*"
+drf-yasg = "*"
+django-cors-headers = "*"
+pytils = "*"
+django-decorator-include = "*"
 psycopg2-binary = "*"
 pandas = "*"
 
 [dev-packages]
 
 [requires]
-python_version = "3.9"
+python_version = "3.8"
