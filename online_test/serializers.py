@@ -1,14 +1,12 @@
 from rest_framework import serializers
-from .models import OnlineTestQuestion, OnlineTest, AnswerTest
+from .models import OnlineTest, AnswerTest
 
 
 class OnlineTestListSerializer(serializers.ModelSerializer):
-    #  questions = OnlineTestQuestionSerializer(many = True)
-
     class Meta:
         model = OnlineTest
         fields = ('id', 'name', 'intro', 'part_num', 'version', 'duration',
-                  'num_questions', 'language')
+                  'num_questions', 'lang')
 
 
 class AnswerSerializer(serializers.ModelSerializer):
@@ -26,4 +24,4 @@ class QuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = OnlineTest
         fields = ('id', 'name', 'part_num', 'version', 'duration',
-                  'num_questions', 'language', 'questions')
+                  'num_questions', 'lang', 'questions')

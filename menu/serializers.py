@@ -5,10 +5,10 @@ from .models import MenuLink, FooterLink
 class MenuSerializer(serializers.ModelSerializer):
     class Meta:
         model = MenuLink
-        fields = ('id', 'title', 'link', 'icon', 'lang_menu_link')
+        fields = ('id', 'title', 'link', 'icon', 'lang')
 
 
 class FooterSerializer(serializers.ModelSerializer):
     class Meta:
         model = FooterLink
-        fields = ('id', 'title', 'link', 'lang_footer_link')
+        fields = ('id', 'title', 'link', 'lang')

@@ -5,12 +5,12 @@ from django.utils.safestring import mark_safe
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
 
-admin.site.register(News)
+@admin.register(News)
 class NewsAdmin(admin.ModelAdmin):
-    list_display = ('id', 'language', 'title', 'important', 'created')
+    list_display = ('id', 'title', 'lang', 'important', 'created')
     list_display_links = ('id', 'title')
     search_fields = ('title',)
-    list_filter = ('title', 'created')
+    list_filter = ('id', 'title', 'created')
 
     fieldsets = [
 
@@ -19,7 +19,7 @@ class NewsAdmin(admin.ModelAdmin):
             'description': '<p>Укажите <strong>главную новость</strong>, если эта является ее переводом</p>'
         },),
         ('Создание новости', {
-            'fields': ('title', 'article', 'important', 'language', 'cover')
+            'fields': ('title', 'article', 'important', 'lang', 'cover')
         },),
         ('Другие возможности', {
             'fields': ('banners',),

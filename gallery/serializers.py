@@ -14,10 +14,6 @@ class GalleryListSerializers(serializers.Serializer):
 	def get_cover(self, obj):
 		return GalleryImagesSerializer(obj.photos.first()).data['photo']
 
-	# class Meta:
-	# 	model = Gallery
-	# 	fields = ('id', 'title', 'cover')
-
 
 class GalleryDetailSerilizer(serializers.Serializer):
 	id = serializers.IntegerField(read_only=True)

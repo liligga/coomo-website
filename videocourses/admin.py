@@ -4,13 +4,13 @@ from .models import Course, Video
 
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
-	list_display = ['name', 'lang_course']
-	list_filter = ['name', 'lang_course']
+	list_display = ['name', 'lang']
+	list_filter = ['name', 'lang']
 	save_as = True
 
 
 @admin.register(Video)
 class VideoAdmin(admin.ModelAdmin):
-	list_display = ['course', 'name', 'lang_video']
-	list_filter = ['name', 'lang_video']
+	list_display = ['course', 'name', 'lang']
+	list_filter = ['name', 'lang']
 	save_as = True

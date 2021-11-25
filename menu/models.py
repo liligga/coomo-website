@@ -20,7 +20,7 @@ class MenuLink(models.Model):
 		upload_to='icons_menu',
 		unique=True,
 		help_text="Добавлять только картинки размера 25х25")
-	lang_menu_link = models.CharField(
+	lang = models.CharField(
 		max_length=15,
 		choices=LANGUAGE_CHOICES,
 		default='Ru')
@@ -40,7 +40,7 @@ class FooterLink(models.Model):
 	title = models.CharField(max_length=100)
 	is_active = models.BooleanField(default=False)
 	link = models.URLField(max_length=200)
-	lang_footer_link = models.CharField(
+	lang = models.CharField(
 		max_length=15,
 		choices=LANGUAGE_CHOICES,
 		default='Ru')

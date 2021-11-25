@@ -10,10 +10,10 @@ class CourseListView(ListAPIView):
 	queryset = Course.objects.all()
 	serializer_class = CoursesListSerializer
 	filter_backends = [DjangoFilterBackend]
-	filterset_fields = ['lang_course']
+	filterset_fields = ['lang']
 
 	def get(self, request):
-		courses = self.queryset.order_by('lang_course').values('name', 'id', 'lang_course')
+		courses = self.queryset.order_by('lang').values('name', 'id', 'lang')
 		data = {}
 		for item in courses:
 			data.setdefault(item['name'], []).append(item)

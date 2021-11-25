@@ -54,8 +54,8 @@ class TestGallery(APITestCase):
 		response = self.client.get(reverse('gallery_detail', kwargs={'pk':'1'}))
 		data = json.loads(response.content)
 		content = {
+				'id': self.test_gallery_one.id,
 				'title': self.test_gallery_one.title,
-				'description': self.test_gallery_one.description,
 				'photos_gallery': [{'photo': self.test_gallery_images_one.photo}]}
 		self.assertEqual(response.status_code, status.HTTP_200_OK)
 		self.assertEqual(data, content)
