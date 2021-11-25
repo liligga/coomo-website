@@ -7,15 +7,13 @@ from .models import Course, Video
 from rest_framework.response import Response
 
 class CourseListView(ListAPIView):
-	'''http://*?lang_course=Kg должно быть после всей ссылки,
-	course_list?lang_course=Kg'''
 	queryset = Course.objects.all()
 	serializer_class = CoursesListSerializer
 	filter_backends = [DjangoFilterBackend]
 	filterset_fields = ['lang_course']
 
 	def get(self, request):
-		courses = self.queryset.values('name', 'id', 'lang_course')
+		courses = self.queryset.order_by('lang_course').values('name', 'id', 'lang_course')
 		data = {}
 		for item in courses:
 			data.setdefault(item['name'], []).append(item)

@@ -49,7 +49,11 @@ class Video(models.Model):
 		max_length=150,
 		unique=True,
 		blank=True,
-		verbose_name='Ссылка на видео')
+		verbose_name='Ссылка на видео',
+		error_messages ={
+			"unique":"Ссылка на видео не должна совпадать с другими."
+		}
+		)
 	lang_video = models.CharField(
 		default='Ru',
 		choices=LANGUAGE_CHOICES,

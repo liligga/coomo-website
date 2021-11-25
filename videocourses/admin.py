@@ -11,6 +11,6 @@ class CourseAdmin(admin.ModelAdmin):
 
 @admin.register(Video)
 class VideoAdmin(admin.ModelAdmin):
-	list_display = ['name', 'lang_video']
+	list_display = ['course', 'name', 'lang_video']
 	list_filter = ['name', 'lang_video']
 	save_as = True
