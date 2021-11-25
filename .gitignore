@@ -120,11 +120,3 @@ GitHub.sublime-settings
 #static
 /static
 
-#migrations, explicitly
-authentication/migrations/*
-gallery/migrations/*
-menu/migrations/*
-news/migrations/*
-online_test/migrations/*
-reports/migrations/*
-videocourses/migrations/*
