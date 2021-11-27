@@ -12,8 +12,8 @@ class NewsSerializer(serializers.Serializer):
 
 
 class NewsDetailSerializer(serializers.ModelSerializer):
-    author = serializers.SlugRelatedField(slug_field='username', read_only=True)
+    # author = serializers.SlugRelatedField(slug_field='username', read_only=True)
 
     class Meta:
         model = News
-        fields = '__all__'
+        fields = ('title', 'article', 'cover', )
