@@ -1,5 +1,6 @@
 from django.db import models
 
+from news.models import News
 
 LANGUAGE_CHOICES = [
 	('Ru', 'Русский'),
@@ -13,18 +14,31 @@ class ActiveLinksManager(models.Manager):
 
 
 class MenuLink(models.Model):
-	title = models.CharField(max_length=100)
-	is_active = models.BooleanField(default=False)
-	link = models.URLField(max_length=200)
+	title = models.CharField(max_length=100, verbose_name='Название')
+	is_active = models.BooleanField(default=False, verbose_name='Активно')
+	link = models.URLField(max_length=200, verbose_name='Ссылка', blank=True, null=True)
 	icon = models.FileField(
 		upload_to='icons_menu',
 		unique=True,
-		help_text="Добавлять только картинки размера 25х25")
+		help_text="Добавлять только картинки размера 25х25",
+		verbose_name='Иконка',
+		blank=True,
+		null=True)
 	lang = models.CharField(
 		max_length=15,
 		choices=LANGUAGE_CHOICES,
-		default='Ru')
-
+		default='Ru',
+		verbose_name='Язык',
+		blank=True,
+		null=True)
+	news = models.ForeignKey(
+		News,
+		blank=True,
+		null=True,
+		on_delete=models.DO_NOTHING,
+		help_text='Укажите новость, если ссылка должна указывать на неё',
+		verbose_name='Связанная новость',
+		related_name='news_link')
 	objects = models.Manager()
 	active_objects = ActiveLinksManager()
 
