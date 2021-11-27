@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'reports',
     'gallery',
     'search',
+    'faq',
 
     # Django
     'django.contrib.admin',
