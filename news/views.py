@@ -52,6 +52,6 @@ class NewsDetailView(RetrieveAPIView):
     def retrieve(self, request, *args, **kwargs):
         current = News.objects.get(slug=kwargs.get('slug'))
         current_news = NewsDetailSerializer(current)
-        four_last_news = News.objects.all().order_by('-id')[:4]
+        four_last_news = News.objects.all().exclude(id=current.id).order_by('-id')[:4]
         four_last_news = NewsDetailSerializer(four_last_news, many=True)
         return Response({'current_news': current_news.data, 'related': four_last_news.data})
