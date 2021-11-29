@@ -1,3 +1,4 @@
+from rest_framework.generics import RetrieveAPIView
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import *
@@ -10,3 +11,8 @@ class ReportsView(APIView):
         serializer = ReportsSerializer(reports, many=True)
         context = {"reports": serializer.data}
         return Response(context)
+
+
+class ReportsDetailView(RetrieveAPIView):
+    queryset = Reports.objects.all()
+    lookup_field = 'id'

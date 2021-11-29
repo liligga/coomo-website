@@ -8,7 +8,7 @@ class MenuSerializer(serializers.ModelSerializer):
     news_slug = serializers.SlugField(source='news.slug')
     class Meta:
         model = MenuLink
-        fields = ('id', 'title', 'link', 'icon', 'lang', 'news_slug')
+        fields = ('id', 'title', 'icon', 'lang', 'news_slug')
 
 
 class FooterSerializer(serializers.ModelSerializer):

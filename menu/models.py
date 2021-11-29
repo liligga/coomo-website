@@ -16,7 +16,6 @@ class ActiveLinksManager(models.Manager):
 class MenuLink(models.Model):
 	title = models.CharField(max_length=100, verbose_name='Название')
 	is_active = models.BooleanField(default=False, verbose_name='Активно')
-	link = models.URLField(max_length=200, verbose_name='Ссылка', blank=True, null=True)
 	icon = models.FileField(
 		upload_to='icons_menu',
 		unique=True,
