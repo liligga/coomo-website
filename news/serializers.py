@@ -2,10 +2,15 @@ from rest_framework import serializers
 from .models import News
 
 
-class NewsSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = News
-        fields = ('id', 'title', 'slug', 'excerpt', 'cover', 'lang', 'created', 'updated')
+class NewsSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
+    title = serializers.CharField()
+    slug = serializers.SlugField()
+    excerpt = serializers.CharField()
+    cover = serializers.ImageField()
+    lang = serializers.CharField()
+    created = serializers.DateTimeField()
+    updated = serializers.DateTimeField()
 
 
 class NewsDetailSerializer(serializers.ModelSerializer):
