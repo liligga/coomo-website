@@ -24,7 +24,7 @@ class OnlineTestSitemap(Sitemap):
     priority = 0.5
 
     def items(self):
-        return OnlineTest.objects.all()
+        return OnlineTest.objects.all().order_by('id')
 
     def location(self, item):
         return f'/api/tests/{item.id}'
@@ -35,7 +35,7 @@ class ReportsSitemap(Sitemap):
     priority = 0.5
 
     def items(self):
-        return Reports.objects.all()
+        return Reports.objects.all().order_by('id')
 
     def location(self, item):
         return f'/api/reports/{item.id}'

@@ -1,4 +1,7 @@
+from itertools import chain
+
 from django.db.models import query
+from rest_framework import pagination
 from rest_framework.generics import RetrieveAPIView, ListAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -42,6 +45,14 @@ class NewsListView(ListAPIView):
     queryset = News.objects.all()
     serializer_class = NewsSerializer
     pagination_class = CustomPagination
+    extra_context = News.objects.filter(important=True)
+
+    def list(self, request, *args, **kwargs):
+        response = super(NewsListView, self).list(request, args, kwargs)
+        important_data = News.objects.filter(important=True)
+        important_news = NewsSerializer(important_data, many=True)
+        response.data['important_news'] = important_news.data
+        return response
 
 
 class NewsDetailView(RetrieveAPIView):
@@ -52,6 +63,9 @@ class NewsDetailView(RetrieveAPIView):
     def retrieve(self, request, *args, **kwargs):
         current = News.objects.get(slug=kwargs.get('slug'))
         current_news = NewsDetailSerializer(current)
+        important_data = News.objects.filter(important=True)
+        important_news = NewsSerializer(important_data, many=True)
         four_last_news = News.objects.all().exclude(id=current.id).order_by('-id')[:4]
         four_last_news = NewsDetailSerializer(four_last_news, many=True)
-        return Response({'current_news': current_news.data, 'related': four_last_news.data})
+        return Response({'current_news': current_news.data, 'related': four_last_news.data,
+                         'important_news': important_news.data, })
