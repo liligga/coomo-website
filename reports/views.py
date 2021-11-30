@@ -14,5 +14,6 @@ class ReportsView(APIView):
 
 
 class ReportsDetailView(RetrieveAPIView):
+    serializer_class = ReportsSerializer
     queryset = Reports.objects.all()
     lookup_field = 'id'
