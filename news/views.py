@@ -66,6 +66,6 @@ class NewsDetailView(RetrieveAPIView):
         important_data = News.objects.filter(important=True)[0]
         important_news = NewsSerializer(important_data)
         four_last_news = News.objects.all().exclude(id=current.id).order_by('-id')[:4]
-        four_last_news = NewsDetailSerializer(four_last_news, many=True)
+        four_last_news = NewsSerializer(four_last_news, many=True)
         return Response({'current_news': current_news.data, 'related': four_last_news.data,
                          'important_news': important_news.data, })
