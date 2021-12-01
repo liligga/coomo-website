@@ -1,6 +1,7 @@
 from django.db import models
 
 from news.models import News
+from pages.models import Page
 
 LANGUAGE_CHOICES = [
 	('Ru', 'Русский'),
@@ -30,14 +31,14 @@ class MenuLink(models.Model):
 		verbose_name='Язык',
 		blank=True,
 		null=True)
-	news = models.ForeignKey(
-		News,
+	page = models.ForeignKey(
+		Page,
 		blank=True,
 		null=True,
 		on_delete=models.DO_NOTHING,
-		help_text='Укажите новость, если ссылка должна указывать на неё',
-		verbose_name='Связанная новость',
-		related_name='news_link')
+		help_text='Укажите страницу, если ссылка должна указывать на неё',
+		verbose_name='Связанная страница',
+		related_name='page_link')
 	objects = models.Manager()
 	active_objects = ActiveLinksManager()
 

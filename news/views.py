@@ -45,7 +45,6 @@ class NewsListView(ListAPIView):
     queryset = News.objects.all()
     serializer_class = NewsSerializer
     pagination_class = CustomPagination
-    extra_context = News.objects.filter(important=True)
 
     def list(self, request, *args, **kwargs):
         response = super(NewsListView, self).list(request, args, kwargs)
