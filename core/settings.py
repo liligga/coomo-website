@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'gallery',
     'search',
     'faq',
+    'pages',
 
     # Django
     'django.contrib.admin',

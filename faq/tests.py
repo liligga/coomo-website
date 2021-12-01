@@ -33,7 +33,6 @@ class TestFAQ(TestCase):
             },
         ]
 
-
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.data), 2)
         self.assertEqual(data, response.json())
