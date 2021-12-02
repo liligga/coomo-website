@@ -10,7 +10,7 @@ class NewsAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'lang', 'important', 'created')
     list_display_links = ('id', 'title')
     search_fields = ('title',)
-    list_filter = ('id', 'title', 'created')
+    list_filter = ('lang', 'created', 'banners')
 
     fieldsets = [
 

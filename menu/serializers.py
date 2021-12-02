@@ -1,11 +1,15 @@
 from rest_framework import serializers
+
+from news.models import News
 from .models import MenuLink, FooterLink
 
 
 class MenuSerializer(serializers.ModelSerializer):
+    page_slug = serializers.SlugField(source='page.slug', allow_null=True)
+
     class Meta:
         model = MenuLink
-        fields = ('id', 'title', 'link', 'icon', 'lang')
+        fields = ('id', 'title', 'icon', 'lang', 'page_slug', 'position')
 
 
 class FooterSerializer(serializers.ModelSerializer):

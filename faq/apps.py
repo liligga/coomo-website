@@ -1,7 +1,7 @@
 from django.apps import AppConfig
 
 
-class GalleryConfig(AppConfig):
+class FaqConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'gallery'
-    verbose_name = 'Галерея'
+    name = 'faq'
+    verbose_name = 'ЧаВо'

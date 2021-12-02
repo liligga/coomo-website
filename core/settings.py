@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'reports',
     'gallery',
     'search',
+    'faq',
+    'pages',
 
     # Django
     'django.contrib.admin',
@@ -57,6 +59,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'drf_yasg',
+    'django.contrib.sitemaps',
 
     # Libs
     'rest_framework',

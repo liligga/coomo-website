@@ -1,56 +1,77 @@
 from django.db import models
 
+from news.models import News
+from pages.models import Page
 
 LANGUAGE_CHOICES = [
-	('Ru', 'Русский'),
-	('Kg', 'Кыргызский'),
+    ('Ru', 'Русский'),
+    ('Kg', 'Кыргызский'),
+]
+POSITION_CHOICES = [
+    ('left', 'Левое меню'),
+    ('bottom', 'Нижнее меню'),
 ]
 
 
 class ActiveLinksManager(models.Manager):
-	def get_queryset(self):
-		return super().get_queryset().filter(is_active=True)
+    def get_queryset(self):
+        return super().get_queryset().filter(is_active=True)
 
 
 class MenuLink(models.Model):
-	title = models.CharField(max_length=100)
-	is_active = models.BooleanField(default=False)
-	link = models.URLField(max_length=200)
-	icon = models.FileField(
-		upload_to='icons_menu',
-		unique=True,
-		help_text="Добавлять только картинки размера 25х25")
-	lang = models.CharField(
-		max_length=15,
-		choices=LANGUAGE_CHOICES,
-		default='Ru')
+    title = models.CharField(max_length=100, verbose_name='Название')
+    is_active = models.BooleanField(default=False, verbose_name='Активно')
+    icon = models.FileField(
+        upload_to='icons_menu',
+        unique=True,
+        help_text="Добавлять только картинки размера 25х25",
+        verbose_name='Иконка',
+        blank=True,
+        null=True)
+    lang = models.CharField(
+        max_length=15,
+        choices=LANGUAGE_CHOICES,
+        default='Ru',
+        verbose_name='Язык',
+        blank=True,
+        null=True)
+    page = models.ForeignKey(
+        Page,
+        blank=True,
+        null=True,
+        on_delete=models.DO_NOTHING,
+        help_text='Укажите страницу, если ссылка должна указывать на неё',
+        verbose_name='Связанная страница',
+        related_name='page_link')
+    position = models.CharField(max_length=10, choices=POSITION_CHOICES, default='left', verbose_name='Позиция меню',
+                                blank=True, null=True,
+                                help_text='Укажите в каком меню появится эта ссылка. В левом боковом или нижнем среднем')
+    objects = models.Manager()
+    active_objects = ActiveLinksManager()
 
-	objects = models.Manager()
-	active_objects = ActiveLinksManager()
+    def __str__(self):
+        return self.title
 
-	def __str__(self):
-		return self.title
-
-	class Meta:
-		verbose_name = 'Ссылка в меню'
-		verbose_name_plural = 'Ссылки меню'
+    class Meta:
+        verbose_name = 'Ссылка в меню'
+        verbose_name_plural = 'Ссылки меню'
 
 
 class FooterLink(models.Model):
-	title = models.CharField(max_length=100)
-	is_active = models.BooleanField(default=False)
-	link = models.URLField(max_length=200)
-	lang = models.CharField(
-		max_length=15,
-		choices=LANGUAGE_CHOICES,
-		default='Ru')
+    title = models.CharField(max_length=100)
+    is_active = models.BooleanField(default=False)
+    link = models.URLField(max_length=200)
+    lang = models.CharField(
+        max_length=15,
+        choices=LANGUAGE_CHOICES,
+        default='Ru')
 
-	objects = models.Manager()
-	active_objects = ActiveLinksManager()
+    objects = models.Manager()
+    active_objects = ActiveLinksManager()
 
-	def __str__(self):
-		return self.title
+    def __str__(self):
+        return self.title
 
-	class Meta:
-		verbose_name = 'Ссылка футера'
-		verbose_name_plural = 'Ссылки футера'
+    class Meta:
+        verbose_name = 'Ссылка футера'
+        verbose_name_plural = 'Ссылки футера'
