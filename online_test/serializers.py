@@ -3,6 +3,8 @@ from .models import OnlineTestQuestion, OnlineTest, AnswerTest
 
 
 class OnlineTestListSerializer(serializers.ModelSerializer):
+    name = serializers.CharField(source='get_name_display')
+
     class Meta:
         model = OnlineTest
         fields = ('id', 'name', 'intro', 'part_num', 'version', 'duration',
