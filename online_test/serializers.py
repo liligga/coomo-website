@@ -3,7 +3,7 @@ from .models import OnlineTestQuestion, OnlineTest, AnswerTest
 
 
 class OnlineTestListSerializer(serializers.ModelSerializer):
-    name = serializers.CharField(source='get_name_display')
+    name = serializers.CharField()
     lang = serializers.CharField(source='get_lang_display')
 
     class Meta:
