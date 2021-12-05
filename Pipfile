@@ -33,6 +33,7 @@ Pillow = "==8.2.0"
 django-ckeditor = "*"
 psycopg2-binary = "*"
 pandas = "*"
+factory-boy = "*"
 
 [dev-packages]
 
