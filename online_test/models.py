@@ -6,19 +6,6 @@ LANGUAGE_CHOICES = [
     ('Kg', 'Кыргызский'),
 ]
 
-SCHOOL_SUBJECTS = [
-    ('Math_ru', 'Математика'),
-    ('Analogies_ru', 'Аналогии и дополнения предложений'),
-    ('Reading_ru', 'Чтение и понимание'),
-    ('Grammatic_practice_ru', 'Практическая грамматика русского языка'),
-    ('Grammatic_practice_kg', 'Практическая грамматика кыргызского языка'),
-    ('History_ru', 'История'),
-    ('Physics_ru', 'Физика'),
-    ('Biology_ru', 'Биология'),
-    ('Chemistry_ru', 'Химия'),
-    ('Math_subj_ru', 'Математика предметная'),
-]
-
 
 class OnlineTest(models.Model):
     PART_NUMBERS = [
@@ -34,8 +21,7 @@ class OnlineTest(models.Model):
         (10, 'X'),
     ]
     name = models.CharField(
-        max_length=50,
-        choices=SCHOOL_SUBJECTS,
+        max_length=300,
         verbose_name='Предмет')
     part_num = models.IntegerField(
         verbose_name='Часть',

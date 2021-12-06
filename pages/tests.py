@@ -1,6 +1,5 @@
 from django.test import TestCase, Client
 from django.urls import reverse
-
 from pages.models import Page
 
 
@@ -37,6 +36,7 @@ class TestPages(TestCase):
                 'slug': 'uchitelyam'
             },
         ]
+        print(self.page1.id, self.page2.id, self.page3.id)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.data), 3)
         self.assertEqual(data, response.json())
@@ -45,7 +45,7 @@ class TestPages(TestCase):
         response = self.client.get(self.detail_url)
 
         data = {
-            'id': 1,
+            'id': self.page1.id,
             'title': 'Студентам',
             'slug': 'studentam',
             'article': 'Информация для студентов'
