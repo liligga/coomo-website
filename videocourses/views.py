@@ -15,7 +15,6 @@ class CourseListView(ListAPIView):
 
     def get(self, request):
         courses = self.queryset.order_by('lang').values('name', 'id', 'lang')
-        print(courses)
         data = {}
         for item in courses:
             data.setdefault(item['name'], {})[item['lang']] = item
