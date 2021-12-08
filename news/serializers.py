@@ -11,6 +11,7 @@ class NewsSerializer(serializers.Serializer):
     lang = serializers.CharField()
     created = serializers.DateTimeField()
     updated = serializers.DateTimeField()
+    project = serializers.BooleanField()
 
 
 class NewsDetailSerializer(serializers.ModelSerializer):
@@ -18,4 +19,4 @@ class NewsDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = News
-        fields = ('id', 'title', 'slug', 'article', 'cover', 'created', 'updated')
+        fields = ('id', 'title', 'slug', 'article', 'cover', 'created', 'updated', 'project')

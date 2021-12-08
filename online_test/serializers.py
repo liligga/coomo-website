@@ -21,8 +21,9 @@ class AnswerSerializer(serializers.ModelSerializer):
 class QuestionSerializer(serializers.ModelSerializer):
     questions = serializers.SerializerMethodField()
 
+
     def get_questions(self, obj):
-        return obj.questions.all().values_list('question', flat=True)
+        return obj.questions.all().values('question', 'num_start', 'num_end')
 
     class Meta:
         model = OnlineTest

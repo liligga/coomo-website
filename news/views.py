@@ -7,8 +7,8 @@ from rest_framework.views import APIView
 from rest_framework.pagination import PageNumberPagination
 from .models import *
 from .serializers import NewsSerializer, NewsDetailSerializer
-from menu.models import MenuLink
-from menu.serializers import MenuSerializer
+from menu.models import MenuLink, FooterLink
+from menu.serializers import MenuSerializer, FooterSerializer
 from reports.models import Reports
 from reports.serializers import ReportsSerializer
 
@@ -25,17 +25,20 @@ class HomeView(APIView):
         banners = News.objects.filter(banners=True)
         menu = MenuLink.objects.filter(is_active=True)
         reports = Reports.objects.all()
+        footer = FooterLink.objects.filter(is_active=True)
         serializer1 = NewsSerializer(last_eight_news, many=True)
         serializer2 = NewsSerializer(important_news)
         serializer3 = NewsSerializer(banners, many=True)
         serializer4 = MenuSerializer(menu, many=True)
         serializer5 = ReportsSerializer(reports, many=True)
+        serializer6 = FooterSerializer(footer, many=True)
         context = {
             'last_eight_news': serializer1.data,
             'important_news': serializer2.data,
             'banners': serializer3.data,
             'menu': serializer4.data,
-            'reports': serializer5.data
+            'reports': serializer5.data,
+            'footer': serializer6.data
         }
         return Response(context)
 
