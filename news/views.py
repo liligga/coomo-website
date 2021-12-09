@@ -57,7 +57,7 @@ class NewsListView(ListAPIView):
 
 
 class NewsDetailView(RetrieveAPIView):
-    queryset = News.objects.all().filter(project=False)
+    queryset = News.objects.all()
     serializer_class = NewsDetailSerializer
     lookup_field = 'slug'
 
@@ -78,7 +78,7 @@ class ProjectList(ListAPIView):
     pagination_class = CustomPagination
 
 
-class ProjectDetailView(RetrieveAPIView):
-    queryset = News.objects.filter(project=True)
-    serializer_class = NewsDetailSerializer
-    lookup_field = 'slug'
+# class ProjectDetailView(RetrieveAPIView):
+#     queryset = News.objects.filter(project=True)
+#     serializer_class = NewsDetailSerializer
+#     lookup_field = 'slug'
