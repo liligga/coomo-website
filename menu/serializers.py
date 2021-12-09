@@ -4,12 +4,20 @@ from news.models import News
 from .models import MenuLink, FooterLink
 
 
-class MenuSerializer(serializers.ModelSerializer):
+class MenuSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
+    title = serializers.CharField()
+    icon = serializers.ImageField()
+    lang = serializers.CharField()
     page_slug = serializers.SlugField(source='page.slug', allow_null=True)
+    position = serializers.CharField()
+    link = serializers.CharField()
 
-    class Meta:
-        model = MenuLink
-        fields = ('id', 'title', 'icon', 'lang', 'page_slug', 'position', 'link')
+    def to_representation(self, instance):
+        response = super(MenuSerializer, self).to_representation(instance)
+        if instance.icon:
+            response['icon'] = instance.icon.url
+        return response
 
 
 class FooterSerializer(serializers.ModelSerializer):
