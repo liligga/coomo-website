@@ -57,6 +57,7 @@ class News(models.Model):
         blank=True,
         null=True,
         related_name='news')
+    project = models.BooleanField(default=False, verbose_name='Проект', help_text='Эта запись является Проектом')
 
     def __str__(self):
         return self.title
