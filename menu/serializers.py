@@ -9,7 +9,7 @@ class MenuSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = MenuLink
-        fields = ('id', 'title', 'icon', 'lang', 'page_slug', 'position')
+        fields = ('id', 'title', 'icon', 'lang', 'page_slug', 'position', 'link')
 
 
 class FooterSerializer(serializers.ModelSerializer):
