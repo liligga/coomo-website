@@ -2,8 +2,39 @@ from django.db import models
 from ckeditor.fields import RichTextField
 
 LANGUAGE_CHOICES = [
+    (None, 'Выберите язык'),
     ('Ru', 'Русский'),
     ('Kg', 'Кыргызский'),
+]
+
+
+SCHOOL_SUBJECTS = [
+    ('На русском', (
+            ('Math_ru', 'Математика'),
+            ('Analogies_ru', 'Аналогии и дополнения предложений'),
+            ('Reading_ru', 'Чтение и понимание'),
+            ('Grammatic_practice_ru', 'Практическая грамматика русского языка'),
+            ('History_ru', 'История'),
+            ('Physics_ru', 'Физика'),
+            ('Biology_ru', 'Биология'),
+            ('Chemistry_ru', 'Химия'),
+            ('Math_subj_ru', 'Математика предметная'),
+            ('English_ru', 'Английский язык'),
+        )
+    ),
+    ('Кыргызча', (
+            ('Math_kg', 'Математика'),
+            ('Analogies_kg', 'Окшоштуктар жана сүйлөмдөрдү толуктоо'),
+            ('Reading_kg', 'Текстти окуу жана түшүнүү'),
+            ('Grammatic_practice_kg', 'Кыргыз тилинин практикалык грамматикасы'),
+            ('History_kg', 'Тарых'),
+            ('Physics_kg', 'Физика'),
+            ('Biology_kg', 'Биология'),
+            ('Chemistry_kg', 'Химия'),
+            ('Math_subj_kg', 'Математика предметная'),
+            ('English_kg', 'Англис тили'),
+        )
+    ),
 ]
 
 
@@ -21,7 +52,8 @@ class OnlineTest(models.Model):
         (10, 'X'),
     ]
     name = models.CharField(
-        max_length=300,
+        max_length=100,
+        choices=SCHOOL_SUBJECTS,
         verbose_name='Предмет')
     part_num = models.IntegerField(
         verbose_name='Часть',

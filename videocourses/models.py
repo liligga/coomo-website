@@ -2,6 +2,7 @@ from django.db import models
 
 
 LANGUAGE_CHOICES = [
+    (None, 'Выберите язык'),	
 	('Ru', 'Русский'),
 	('Kg', 'Кыргызский'),
 ]
