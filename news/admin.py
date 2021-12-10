@@ -22,7 +22,7 @@ class NewsAdmin(admin.ModelAdmin):
             'fields': ('title', 'article', 'important', 'lang', 'cover')
         },),
         ('Другие возможности', {
-            'fields': ('banners', 'project'),
+            'fields': ('banners',),
             'description': '<strong>Использовать эту новость как баннер на главной</strong>'
         })]
 
