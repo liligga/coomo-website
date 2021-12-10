@@ -10,6 +10,7 @@ LANGUAGE_CHOICES = [
 POSITION_CHOICES = [
     ('left', 'Левое меню'),
     ('bottom', 'Нижнее меню'),
+    ('banner', 'На баннере'),
 ]
 
 
@@ -43,9 +44,13 @@ class MenuLink(models.Model):
         help_text='Укажите страницу, если ссылка должна указывать на неё',
         verbose_name='Связанная страница',
         related_name='page_link')
+    link = models.CharField(max_length=300, verbose_name='Ссылка на другие сайты или страницы этого сайта', blank=True,
+                            null=True,
+                            help_text='Выберите что-то одно, либо связанную страницу, либо ссылку в это поле')
     position = models.CharField(max_length=10, choices=POSITION_CHOICES, default='left', verbose_name='Позиция меню',
                                 blank=True, null=True,
-                                help_text='Укажите в каком меню появится эта ссылка. В левом боковом или нижнем среднем')
+                                help_text='Укажите в каком меню появится эта ссылка. В левом боковом, на баннере или ' \
+                                          'нижнем среднем')
     objects = models.Manager()
     active_objects = ActiveLinksManager()
 
