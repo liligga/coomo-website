@@ -7,7 +7,7 @@ class NewsSerializer(serializers.Serializer):
     title = serializers.CharField()
     slug = serializers.SlugField()
     excerpt = serializers.CharField()
-    cover = serializers.ImageField(use_url=False)
+    cover = serializers.ImageField()
     lang = serializers.CharField()
     created = serializers.DateTimeField()
     updated = serializers.DateTimeField()
