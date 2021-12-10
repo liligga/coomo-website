@@ -13,6 +13,12 @@ class NewsSerializer(serializers.Serializer):
     updated = serializers.DateTimeField()
     project = serializers.BooleanField()
 
+    def to_representation(self, instance):
+        response = super(NewsSerializer, self).to_representation(instance)
+        if instance.cover:
+            response['cover'] = instance.cover.url
+        return response
+
 
 class NewsDetailSerializer(serializers.ModelSerializer):
     # author = serializers.SlugRelatedField(slug_field='username', read_only=True)
