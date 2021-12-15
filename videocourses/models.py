@@ -10,7 +10,7 @@ LANGUAGE_CHOICES = [
 
 
 class Course(models.Model):
-	name = models.CharField(max_length=100, verbose_name='Название курса')
+	name = models.CharField(max_length=100, verbose_name='Название курса', db_index=True)
 	description = models.TextField(unique=True, verbose_name='Описание курса')
 	lang = models.CharField(
 		default="Ru",
