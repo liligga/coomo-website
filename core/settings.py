@@ -67,7 +67,6 @@ INSTALLED_APPS = [
     'ckeditor',
     'ckeditor_uploader',
     'django_filters',
-    'faicon',
 ]
 
 MIDDLEWARE = [

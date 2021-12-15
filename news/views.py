@@ -1,6 +1,3 @@
-from itertools import chain
-from django.db.models import query
-from rest_framework import pagination
 from rest_framework.generics import RetrieveAPIView, ListAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView

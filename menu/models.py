@@ -1,5 +1,4 @@
 from django.db import models
-from faicon.fields import FAIconField
 
 from pages.models import Page
 
