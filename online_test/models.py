@@ -54,7 +54,7 @@ class OnlineTest(models.Model):
     name = models.CharField(
         max_length=100,
         choices=SCHOOL_SUBJECTS,
-        verbose_name='Предмет')
+        verbose_name='Предмет', db_index=True)
     part_num = models.IntegerField(
         verbose_name='Часть',
         choices=PART_NUMBERS,

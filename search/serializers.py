@@ -3,6 +3,7 @@ from rest_framework import serializers
 from menu.models import MenuLink
 from news.models import News
 from online_test.models import OnlineTest
+from pages.models import Page
 from reports.models import Reports
 from videocourses.models import Course
 
@@ -34,4 +35,10 @@ class MenuSearchSerializer(serializers.ModelSerializer):
 class CourseSearchSerializer(serializers.ModelSerializer):
     class Meta:
         model = Course
+        fields = '__all__'
+
+
+class PageSearchSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Page
         fields = '__all__'
