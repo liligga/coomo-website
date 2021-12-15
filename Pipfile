@@ -34,8 +34,7 @@ django-ckeditor = "*"
 psycopg2-binary = "*"
 pandas = "*"
 factory-boy = "*"
-django-faicon = "*"
-pyyaml = "==5.4.1"
+PyYAML = "==5.4.1"
 
 [dev-packages]
 
