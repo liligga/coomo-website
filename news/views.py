@@ -68,8 +68,8 @@ class NewsDetailView(RetrieveAPIView):
         lang = self.request.META.get('HTTP_ACCEPT_LANGUAGE').capitalize()
         current = News.objects.get(slug=kwargs.get('slug'))
         current_news = NewsDetailSerializer(current)
-        important_data = News.objects.filter(important=True, project=False, lang=lang)[0]
-        important_news = NewsSerializer(important_data)
+        important_data = News.objects.filter(important=True, project=False)[0]
+        important_news = ImportantNewsSerializer(important_data)
         four_last_news = News.objects.all().exclude(id=current.id).order_by('-id').filter(project=False, lang=lang)[:4]
         four_last_news = NewsSerializer(four_last_news, many=True)
         return Response({'current_news': current_news.data, 'related': four_last_news.data,
