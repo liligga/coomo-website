@@ -1,0 +1,20 @@
+from django import forms
+from django.core.exceptions import ValidationError
+
+from menu.models import MenuLink
+
+
+class MenuLinkForm(forms.ModelForm):
+    class Meta:
+        model = MenuLink
+        fields = '__all__'
+
+    def clean(self):
+        position = self.cleaned_data.get('position')
+        link = self.cleaned_data.get('link')
+        page = self.cleaned_data.get('page')
+        print(position)
+        if position == 'banner' and link is None:
+            raise ValidationError({'link': 'Введите ссылку!'})
+        elif position != 'banner' and page is None:
+            raise ValidationError({'page': 'Укажите страницу!'})
