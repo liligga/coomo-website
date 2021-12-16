@@ -18,7 +18,6 @@ class CustomPagination(PageNumberPagination):
 class HomeView(APIView):
     def get(self, request):
         lang = request.META.get('HTTP_ACCEPT_LANGUAGE').capitalize()
-        print(lang)
         last_eight_news = News.objects.order_by('-created').filter(project=False, lang=lang)[:8]
         important_news = News.objects.filter(important=True, project=False)[0]
         banners = News.objects.filter(banners=True, project=False, lang=lang)

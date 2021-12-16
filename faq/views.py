@@ -10,6 +10,5 @@ class FAQListView(ListAPIView):
 
     def get_queryset(self):
         lang = self.request.META.get('HTTP_ACCEPT_LANGUAGE').capitalize()
-        print(lang)
         queryset = FAQ.objects.filter(lang=lang).order_by('id')
         return queryset
