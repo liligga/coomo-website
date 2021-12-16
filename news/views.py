@@ -53,8 +53,8 @@ class NewsListView(ListAPIView):
     def list(self, request, *args, **kwargs):
         lang = self.request.META.get('HTTP_ACCEPT_LANGUAGE').capitalize()
         response = super(NewsListView, self).list(request, args, kwargs)
-        important_data = News.objects.filter(important=True, project=False, lang=lang)[0]
-        important_news = NewsSerializer(important_data)
+        important_data = News.objects.filter(important=True, project=False)[0]
+        important_news = ImportantNewsSerializer(important_data)
         response.data['important_news'] = important_news.data
         return response
 
