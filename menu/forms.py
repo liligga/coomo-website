@@ -13,7 +13,6 @@ class MenuLinkForm(forms.ModelForm):
         position = self.cleaned_data.get('position')
         link = self.cleaned_data.get('link')
         page = self.cleaned_data.get('page')
-        print(position)
         if position == 'banner' and link is None:
             raise ValidationError({'link': 'Введите ссылку!'})
         elif position != 'banner' and page is None:
