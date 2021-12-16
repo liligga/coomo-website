@@ -11,13 +11,11 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
 from pathlib import Path
-#Переводы
+# Переводы
 from django.utils.translation import gettext_lazy as _
-
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Загрузка .env
 from dotenv import load_dotenv
@@ -72,13 +70,14 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # 'django.middleware.locale.LocaleMiddleware',
+
 ]
 
 ROOT_URLCONF = 'core.urls'
@@ -115,7 +114,6 @@ DATABASES = {
     }
 }
 
-
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
@@ -136,6 +134,11 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
+
+LANGUAGES = [
+    ('ru', _('Russian')),
+    ('kg', _('Kyrgyz')),
+]
 
 LANGUAGE_CODE = 'ru'
 
@@ -176,8 +179,7 @@ CORS_ORIGIN_WHITELIST = [
 ]
 CORS_ORIGIN_WHITELIST.append('http://' + os.environ.get('ALLOWED_HOSTS'))
 
-
-#SMTP
+# SMTP
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = os.environ.get('EMAIL_HOST')
 EMAIL_PORT = int(os.environ.get('EMAIL_PORT'))
@@ -185,7 +187,6 @@ EMAIL_USE_TLS = bool(os.environ.get('EMAIL_USE_TLS'))
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
-
 
 LOGIN_REDIRECT_URL = '/login_page/'
 LOGIN_URL = '/login_page/'
@@ -197,7 +198,6 @@ CKEDITOR_THUMBNAIL_SIZE = (300, 300)
 CKEDITOR_IMAGE_QUALITY = 60
 CKEDITOR_BROWSE_SHOW_DIRS = True
 CKEDITOR_ALLOW_NONIMAGE_FILES = True
-
 
 CKEDITOR_CONFIGS = {
     'default': {
