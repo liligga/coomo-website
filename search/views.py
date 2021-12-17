@@ -24,13 +24,13 @@ class GlobalSearchList(APIView):
             tests = OnlineTest.objects.filter(Q(name__icontains=query))
             reports = Reports.objects.filter(Q(title__icontains=query))
             courses = Course.objects.filter(Q(name__icontains=query))
-            pages = Page.objects.filter(Q(title__icontains=query))
+            # pages = Page.objects.filter(Q(title__icontains=query))
 
             return JsonResponse({'news': SearchNewsSerializer(instance=news, many=True).data,
                                  'tests': OnlineTestSearchSerializer(instance=tests, many=True).data,
                                  'reports': ReportsSearchSerializer(instance=reports, many=True).data,
                                  'courses': CourseSearchSerializer(instance=courses, many=True).data,
-                                 'pages': PageSearchSerializer(instance=pages, many=True).data,
+                                 # 'pages': PageSearchSerializer(instance=pages, many=True).data,
                                  })
 
         return JsonResponse(status=404, data={'message': 'Ничего не найдено'})
