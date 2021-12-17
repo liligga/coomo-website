@@ -46,8 +46,8 @@ class NewsListView(ListAPIView):
     pagination_class = CustomPagination
 
     def get_queryset(self):
-        lang = self.request.META.get('HTTP_ACCEPT_LANGUAGE').capitalize()
-        queryset = News.objects.all().filter(project=False, lang=lang)
+        lang = self.request.META.get('HTTP_ACCEPT_LANGUAGE', 'Ru').capitalize()
+        queryset = News.objects.filter(project=False, lang=lang)
         return queryset
 
     def list(self, request, *args, **kwargs):
