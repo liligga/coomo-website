@@ -6,9 +6,9 @@ class PageListSerializer(serializers.Serializer):
     title = serializers.CharField()
     slug = serializers.SlugField()
 
+
 class PageSerializer(serializers.Serializer):
     id = serializers.IntegerField()
     title = serializers.CharField()
     slug = serializers.SlugField()
     article = serializers.CharField()
-
