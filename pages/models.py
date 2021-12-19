@@ -7,7 +7,7 @@ class Page(models.Model):
     """
     Модель страниц для главной
     """
-    title = models.CharField(max_length=500, verbose_name='Заголовок')
+    title = models.CharField(max_length=500, verbose_name='Заголовок', db_index=True)
     slug = models.SlugField(max_length=500, blank=True, null=True, unique=True)
     article = RichTextUploadingField(verbose_name='Статья')
 

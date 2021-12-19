@@ -3,7 +3,6 @@ from django.db import models
 
 class FAQ(models.Model):
     LANGUAGE = [
-        (None, 'Выберите язык'),
         ('Ru', 'Русский'),
         ('Kg', 'Кыргызский'),
     ]
@@ -11,9 +10,11 @@ class FAQ(models.Model):
     answer = models.CharField(max_length=1500, verbose_name='Ответ на вопрос')
     lang = models.CharField(
         max_length=40,
-        default=None,
+        default='Ru',
         choices=LANGUAGE,
-        verbose_name='Язык вопроса-ответа')
+        verbose_name='Язык вопроса-ответа',
+        null=True,
+        blank=True)
 
     def __str__(self):
         return f'{self.question}'

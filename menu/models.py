@@ -1,6 +1,5 @@
 from django.db import models
 
-from news.models import News
 from pages.models import Page
 
 LANGUAGE_CHOICES = [
@@ -13,6 +12,13 @@ POSITION_CHOICES = [
     ('banner', 'На баннере'),
 ]
 
+ICON_CHOICES = [
+    ('<i class="fas fa-bookmark"></i>', 'ОРТ'),
+    ('<i class="fas fa-copy"></i>', 'Школьная Олимпиада'),
+    ('<i class="fas fa-graduation-cap"></i>', 'Абитуриентам'),
+    ('<i class="fas fa-chalkboard-teacher"></i>', 'Учителям'),
+]
+
 
 class ActiveLinksManager(models.Manager):
     def get_queryset(self):
@@ -22,13 +28,8 @@ class ActiveLinksManager(models.Manager):
 class MenuLink(models.Model):
     title = models.CharField(max_length=100, verbose_name='Название')
     is_active = models.BooleanField(default=False, verbose_name='Активно')
-    icon = models.FileField(
-        upload_to='icons_menu',
-        unique=True,
-        help_text="Добавлять только картинки размера 25х25",
-        verbose_name='Иконка',
-        blank=True,
-        null=True)
+    # icon = FAIconField(blank=True, null=True, verbose_name='Иконка')
+    icon = models.CharField(choices=ICON_CHOICES, max_length=50, verbose_name='Иконка', blank=True, null=True)
     lang = models.CharField(
         max_length=15,
         choices=LANGUAGE_CHOICES,
