@@ -76,10 +76,11 @@ class OnlineTest(models.Model):
         verbose_name_plural = 'Онлайн тесты'
 
     def __str__(self):
-        return self.name
+        return self.get_name_display()
 
 
 class OnlineTestQuestion(models.Model):
+    ACTION_CREATE = 'CREATE'
     onlinetest = models.ForeignKey(
         OnlineTest,
         on_delete=models.CASCADE,
@@ -111,6 +112,7 @@ CORRECT_ANS_CHOICES = [
 
 
 class AnswerTest(models.Model):
+    ACTION_CREATE = 'CREATE'
     onlinetest = models.ForeignKey(OnlineTest, on_delete=models.CASCADE, related_name='answers')
     question_number = models.IntegerField(verbose_name='Номер вопроса', blank=True)
     correct_answer = models.CharField(default='А', choices=CORRECT_ANS_CHOICES, verbose_name='Правильный ответ',

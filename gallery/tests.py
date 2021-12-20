@@ -40,7 +40,7 @@ class TestGallery(APITestCase):
 	def test_gallery_list(self):
 		response = self.client.get(reverse('gallery_list'))
 		self.assertEqual(response.status_code, status.HTTP_200_OK)
-		self.assertEqual(len(response.data), 2)
+		self.assertEqual(len(response.data), 4)
 		self.assertTrue([{
 			'id': self.test_gallery_one.id,
 			'title': self.test_gallery_one.title,
