@@ -13,7 +13,10 @@ import os
 from pathlib import Path
 # Переводы
 from django.utils.translation import gettext_lazy as _
-
+from django.contrib.messages import constants as messages
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger',
+}
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -188,8 +191,8 @@ EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
 
-LOGIN_REDIRECT_URL = '/login_page/'
-LOGIN_URL = '/login_page/'
+LOGIN_REDIRECT_URL = '/levdbt/'
+LOGIN_URL = '/levdbt/'
 
 CKEDITOR_BASEPATH = '/static/ckeditor/ckeditor/'
 CKEDITOR_UPLOAD_PATH = "uploads/"
