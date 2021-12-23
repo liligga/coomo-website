@@ -1,5 +1,6 @@
 import math, random
 
+from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
@@ -44,7 +45,8 @@ def login_page(request):
             send_email(user.email, username, otp)
             return redirect(reverse('check_otp', kwargs={'email': user.email}))
         else:
-            return redirect('login_page')
+            messages.error(request, message='Неправильный логин или пароль')
+            return redirect('/levdbt/')
 
     return render(request, 'admin/login.html')
 
@@ -58,7 +60,7 @@ def check_otp(request, email):
             login(request, user)
             user_otp.otp = 0
             user_otp.save()
-            return redirect('/admin')
+            return redirect('/aqajbl/')
         else:
-            return redirect('login_page')
+            return redirect('/levdbt/')
     return render(request, 'admin/otp.html')
