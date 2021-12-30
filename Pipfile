@@ -35,6 +35,7 @@ psycopg2-binary = "*"
 pandas = "*"
 factory-boy = "*"
 pyyaml = "==5.4.1"
+xlrd = "*"
 
 [dev-packages]
 
