@@ -47,17 +47,16 @@ class OnlineTestAdmin(admin.ModelAdmin):
          ),
     ]
 
-
-def save_model(self, request, obj, form, change):
-    file = request.FILES.get('excel_file')
-    obj.save()
-    if file:
-        answers = pd.read_excel(file)
-        for col_n, col_contents in answers.iteritems():
-            if str(col_contents.values[0]).isdigit():
-                answers = AnswerTest.objects.create(onlinetest=obj, question_number=col_contents.values[0],
-                                                    correct_answer=col_contents.values[1])
-                answers.save()
+    def save_model(self, request, obj, form, change):
+        file = request.FILES.get('excel_file')
+        obj.save()
+        if file:
+            answers = pd.read_excel(file)
+            for col_n, col_contents in answers.iteritems():
+                if str(col_contents.values[0]).isdigit():
+                    answers = AnswerTest.objects.create(onlinetest=obj, question_number=col_contents.values[0],
+                                                        correct_answer=col_contents.values[1])
+                    answers.save()
 
 
 admin.site.site_title = "Панель администратора"
