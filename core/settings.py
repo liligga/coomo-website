@@ -204,6 +204,7 @@ CKEDITOR_ALLOW_NONIMAGE_FILES = True
 
 CKEDITOR_CONFIGS = {
     'default': {
+        'disallowedContent': 'img{width,height}',
         'skin': 'moono',
         # 'skin': 'office2013',
         'toolbar_Basic': [
