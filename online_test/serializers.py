@@ -20,7 +20,7 @@ class AnswerSerializer(serializers.ModelSerializer):
 
 class QuestionSerializer(serializers.ModelSerializer):
     questions = serializers.SerializerMethodField()
-
+    name = serializers.CharField(source='get_name_display')
 
     def get_questions(self, obj):
         return obj.questions.all().values('question', 'num_start', 'num_end')
