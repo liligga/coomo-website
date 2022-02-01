@@ -1,5 +1,7 @@
 from django.contrib import admin
 from django import forms
+
+from .forms import NewsForm
 from .models import *
 from django.utils.safestring import mark_safe
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
@@ -12,6 +14,7 @@ class NewsAdmin(admin.ModelAdmin):
     search_fields = ('title',)
     list_filter = ('lang', 'created', 'banners', 'important', 'project')
     readonly_fields = ['get_cover']
+    form = NewsForm
 
     def get_cover(self, obj):
         if obj.cover:
