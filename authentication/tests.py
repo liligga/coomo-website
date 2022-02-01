@@ -22,8 +22,8 @@ class TestAuthentication(TestCase):
         return super().setUp()
 
     def test_redirect_if_not_logged_in(self):
-        response = self.client.get('/admin')
-        self.assertRedirects(response, '/admin/', status_code=301, target_status_code=302)
+        response = self.client.get('/aqajbl/')
+        self.assertRedirects(response, '/levdbt/?next=/aqajbl/')
 
     def test_can_access_page(self):
         response = self.client.get(self.login_url)
@@ -58,7 +58,7 @@ class TestAuthentication(TestCase):
     def test_otp_pass(self):
         response = self.client.post(reverse('check_otp', kwargs={'email': self.test_user.email}), {'otp': 2222},
                                     format='text/html')
-        self.assertRedirects(response, '/admin', status_code=302, target_status_code=301)
+        self.assertRedirects(response, '/aqajbl/')
 
     def test_opt_wrong(self):
         response = self.client.post(reverse('check_otp', kwargs={'email': self.test_user.email}), {'otp': 5555},
