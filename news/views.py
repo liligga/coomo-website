@@ -19,7 +19,7 @@ class HomeView(APIView):
     def get(self, request):
         lang = request.META.get('HTTP_ACCEPT_LANGUAGE').capitalize()
         last_eight_news = News.objects.order_by('-created').filter(project=False, lang=lang)[:8]
-        important_news = News.objects.filter(important=True, project=False)[0]
+        important_news = News.objects.filter(important=True, project=False).first()
         banners = News.objects.filter(banners=True, project=False, lang=lang)
         menu = MenuLink.objects.filter(is_active=True, lang=lang)
         reports = Reports.objects.all()
@@ -53,7 +53,7 @@ class NewsListView(ListAPIView):
     def list(self, request, *args, **kwargs):
         lang = self.request.META.get('HTTP_ACCEPT_LANGUAGE').capitalize()
         response = super(NewsListView, self).list(request, args, kwargs)
-        important_data = News.objects.filter(important=True, project=False)[0]
+        important_data = News.objects.filter(important=True, project=False).first()
         important_news = ImportantNewsSerializer(important_data)
         response.data['important_news'] = important_news.data
         return response
@@ -68,7 +68,7 @@ class NewsDetailView(RetrieveAPIView):
         lang = self.request.META.get('HTTP_ACCEPT_LANGUAGE').capitalize()
         current = News.objects.get(slug=kwargs.get('slug'))
         current_news = NewsDetailSerializer(current)
-        important_data = News.objects.filter(important=True, project=False)[0]
+        important_data = News.objects.filter(important=True, project=False).first()
         important_news = ImportantNewsSerializer(important_data)
         four_last_news = News.objects.all().exclude(id=current.id).order_by('-id').filter(project=False, lang=lang)[:4]
         four_last_news = NewsSerializer(four_last_news, many=True)
