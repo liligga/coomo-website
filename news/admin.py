@@ -11,15 +11,19 @@ class NewsAdmin(admin.ModelAdmin):
     list_display_links = ('id', 'title')
     search_fields = ('title',)
     list_filter = ('lang', 'created', 'banners', 'important', 'project')
+    readonly_fields = ['get_cover']
+
+    def get_cover(self, obj):
+        if obj.cover:
+            return mark_safe(f'<img src={obj.cover.url} width="890" height="479">')
 
     fieldsets = [
-
         ('Новости на других языках', {
             'fields': ('parent',),
             'description': '<p>Укажите <strong>главную новость</strong>, если эта является ее переводом</p>'
         },),
         ('Создание новости', {
-            'fields': ('title', 'article', 'important', 'lang', 'cover')
+            'fields': ('title', 'article', 'important', 'lang', 'cover', 'get_cover')
         },),
         ('Другие возможности', {
             'fields': ('banners', 'project'),
@@ -29,9 +33,5 @@ class NewsAdmin(admin.ModelAdmin):
     def save_model(self, request, obj, form, change):
         obj.author = request.user
         super().save_model(request, obj, form, change)
-
-    def get_cover(self, obj):
-        if obj.cover:
-            return mark_safe(f'<img src={obj.cover.url} width="50" height="60">')
 
     get_cover.short_description = 'Изображение'
