@@ -26,5 +26,5 @@ class NewsFactory(factory.django.DjangoModelFactory):
     title = factory.LazyAttribute(lambda _: faker.Faker().sentence())
     article = faker.Faker().text()
     important = True
-    lang = random.choice(['Ru', 'Kg'])
+    lang = 'Ru'
     author = factory.SubFactory(UserFactory)
