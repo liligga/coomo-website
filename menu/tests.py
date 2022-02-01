@@ -8,7 +8,6 @@ from pages.models import Page
 
 class TestMenuFooter(APITestCase):
     def setUp(self):
-        self.user = User.objects.create(username='testadmin', password='testpassword')
         self.test_page = Page.objects.create(
             title='Test Title',
             article='Test Article')
