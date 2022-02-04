@@ -10,7 +10,7 @@ from drf_yasg.views import get_schema_view
 from rest_framework import permissions
 
 from authentication.views import check_otp, login_page
-from core.sitemaps import NewsSitemap, OnlineTestSitemap, ReportsSitemap
+from core.sitemaps import NewsSitemap, OnlineTestSitemap, ReportsSitemap, PagesSitemap
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -29,6 +29,7 @@ sitemaps = {
     'news': NewsSitemap,
     'tests': OnlineTestSitemap,
     'reports': ReportsSitemap,
+    'pages': PagesSitemap,
 }
 
 urlpatterns = [
