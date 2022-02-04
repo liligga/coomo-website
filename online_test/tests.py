@@ -2,96 +2,36 @@ from rest_framework.test import APITestCase
 from django.urls import reverse
 from rest_framework import status
 from .models import OnlineTest
+from .factories import *
+from .serializers import *
 
 
 class TestOnlineTest(APITestCase):
 	def setUp(self):
-		self.test_online_test_math_ru = OnlineTest.objects.create(
-			name='Math_ru',
-			part_num=1,
-			version=2,
-			duration=60,
-			num_questions=15,
-			num_answers=6,
-			lang='Ru',
-			is_active=True,
-			intro='Test Text'
-		)
-		self.test_online_test_analogies_ru = OnlineTest.objects.create(
-			name='Analogies_ru',
-			part_num=1,
-			version=1,
-			duration=60,
-			num_questions=15,
-			num_answers=6,
-			lang='Ru',
-			is_active=True,
-			intro='Test Text'
-		)
-		self.test_online_test_history_kg = OnlineTest.objects.create(
-			name='History_kg',
-			part_num=2,
-			version=3,
-			duration=80,
-			num_questions=25,
-			num_answers=6,
-			lang='Kg',
-			is_active=True,
-			intro='Test Text'
-		)
-		self.test_online_test_history_kg = OnlineTest.objects.create(
-			name='History_kg',
-			part_num=2,
-			version=3,
-			duration=80,
-			num_questions=25,
-			num_answers=6,
-			lang='Kg',
-			is_active=False,
-			intro='Test Text'
-		)
+		self.test_list = OnlineTestFactory.create_batch(5)
 
 	def test_online_test_list(self):
 		response = self.client.get(reverse('onlinetest-list'))
 		self.assertEqual(response.status_code, status.HTTP_200_OK)
-		self.assertEqual(len(response.data), 4)
-		self.assertTrue([{
-			'id': 1,
-			'name': 'Math_ru',
-			'part_num': 1,
-			'version': 1,
-			'duration': 60,
-			'num_answers': 6,
-			'lang': 'Ru',
-			'is_active': True,
-			'intro': 'Test Text'
-		}, {
-			'id': 2,
-			'name': 'Analogies_ru',
-			'part_num': 1,
-			'version': 2,
-			'duration': 60,
-			'num_answers': 6,
-			'lang': 'Ru',
-			'is_active': True,
-			'intro': 'Test Text'
-		}, {
-			'id': 3,
-			'name': 'History_kg',
-			'part_num': 2,
-			'version': 3,
-			'duration': 80,
-			'num_answers': 6,
-			'lang': 'Kg',
-			'is_active': True,
-			'intro': 'Test Text'
-		}, {
-			'id': 4,
-			'name': 'History_kg',
-			'part_num': 2,
-			'version': 3,
-			'duration': 80,
-			'num_answers': 6,
-			'lang': 'Kg',
-			'is_active': False,
-			'intro': 'Test Text'}])
+		self.assertEqual(len(response.data), 5)
+		serializer_data = OnlineTestListSerializer(self.test_list, many=True)
+		self.assertEqual(serializer_data.data, response.data)
+
+	def test_questions_test(self):
+		response = self.client.get(reverse('online_tests-questions', kwargs={'pk': self.test_list[0].id}))
+		serializer_data = QuestionSerializer(self.test_list[0]).data['questions']
+		self.assertEqual(response.status_code, status.HTTP_200_OK)
+		self.assertQuerysetEqual(serializer_data, response.data['questions'])
+
+	def test_answer_right(self):
+		response = self.client.get(reverse('online_tests-answers', kwargs={'pk': self.test_list[0].id}))
+		right_answer = {1: 'А'}
+		self.assertEqual(response.status_code, status.HTTP_200_OK)
+		self.assertEqual(right_answer, response.data['answers'])
+
+
+	def test_answer_is_not_right(self):
+		response = self.client.get(reverse('online_tests-answers', kwargs={'pk': self.test_list[0].id}))
+		right_answer = {1: 'Б'}
+		self.assertEqual(response.status_code, status.HTTP_200_OK)
+		self.assertNotEqual(right_answer, response.data['answers'])
