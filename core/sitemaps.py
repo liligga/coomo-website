@@ -2,6 +2,7 @@ from django.contrib.sitemaps import Sitemap
 
 from news.models import News
 from online_test.models import OnlineTest
+from pages.models import Page
 from reports.models import Reports
 
 
@@ -38,4 +39,15 @@ class ReportsSitemap(Sitemap):
         return Reports.objects.all().order_by('id')
 
     def location(self, item):
-        return f'/api/reports/{item.id}'
+        return f'/api/reports/{item.slug}'
+
+
+class PagesSitemap(Sitemap):
+    changefreq = 'weekly'
+    priority = 0.5
+
+    def items(self):
+        return Page.objects.all().order_by('id')
+
+    def location(self, item):
+        return f'/api/pages/{item.slug}'
