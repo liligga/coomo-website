@@ -8,6 +8,7 @@ from menu.models import MenuLink, FooterLink
 from menu.serializers import MenuSerializer, FooterSerializer
 from reports.models import Reports
 from reports.serializers import ReportsSerializer
+from django.shortcuts import get_object_or_404
 
 
 class CustomPagination(PageNumberPagination):
@@ -66,7 +67,7 @@ class NewsDetailView(RetrieveAPIView):
 
     def retrieve(self, request, *args, **kwargs):
         lang = self.request.META.get('HTTP_ACCEPT_LANGUAGE').capitalize()
-        current = News.objects.get(slug=kwargs.get('slug'))
+        current = get_object_or_404(News, slug=kwargs.get('slug'))
         current_news = NewsDetailSerializer(current)
         important_data = News.objects.filter(important=True, project=False).first()
         important_news = ImportantNewsSerializer(important_data)

@@ -1,13 +1,7 @@
 import re
-import os
 from django.db import models
-from io import BytesIO
-from django.core.files import File
-from django.dispatch import receiver
-from pathlib import Path
 from django.contrib.auth.models import User
 from ckeditor_uploader.fields import RichTextUploadingField
-from django.db.models.signals import pre_save, post_save
 from PIL import Image
 from io import BytesIO
 from django.core.files import File
@@ -80,8 +74,6 @@ class News(models.Model):
         img.save(thumb_io, 'JPEG', quality=85)
         thumbnail = File(thumb_io, name=cover.name)
         return thumbnail
-
-
 
 # def news_pre_save(sender, instance, *args, **kwargs):
 #     if instance.important:
