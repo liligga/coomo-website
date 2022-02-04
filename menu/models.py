@@ -10,6 +10,7 @@ POSITION_CHOICES = [
     ('left', 'Левое меню'),
     ('bottom', 'Нижнее меню'),
     ('banner', 'На баннере'),
+    ('about', 'В разделе О ЦООМО')
 ]
 
 ICON_CHOICES = [
