@@ -1,6 +1,9 @@
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from pages.serializers import PageSerializer
 from .serializers import MenuSerializer, FooterSerializer
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import generics
+from rest_framework import generics, status
 from .models import MenuLink, FooterLink
 
 
@@ -10,7 +13,7 @@ class MenuLinksView(generics.ListAPIView):
     filterset_fields = ['lang']
 
     def get_queryset(self):
-        query = self.request.query_params.get('lang')
+        query = self.request.META.get('HTTP_ACCEPT_LANGUAGE', 'Ru').capitalize()
         if query:
             queryset = MenuLink.active_objects.filter(lang=query)
         else:
@@ -25,7 +28,7 @@ class FooterLinksView(generics.ListAPIView):
     filterset_fields = ['lang']
 
     def get_queryset(self):
-        query = self.request.query_params.get('lang')
+        query = self.request.META.get('HTTP_ACCEPT_LANGUAGE', 'Ru').capitalize()
         if query:
             queryset = FooterLink.active_objects.filter(lang=query)
         else:
@@ -34,16 +37,15 @@ class FooterLinksView(generics.ListAPIView):
         return queryset
 
 
-class About(generics.ListAPIView):
-    serializer_class = MenuSerializer
+class About(APIView):
+    serializer_class = PageSerializer
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['lang']
 
-    def get_queryset(self):
-        query = self.request.query_params.get('lang')
-        if query:
-            queryset = MenuLink.active_objects.filter(lang=query, position='about')
-        else:
-            queryset = MenuLink.active_objects.filter(lang='Ru', position='about')
-
-        return queryset
+    def get(self, request, *args, **kwargs):
+        query = request.META.get('HTTP_ACCEPT_LANGUAGE', 'Ru').capitalize()
+        try:
+            menu_page = MenuLink.objects.filter(position='about', lang=query).first().page
+        except:
+            return Response(PageSerializer(None).data, status=status.HTTP_404_NOT_FOUND)
+        page = PageSerializer(menu_page)
+        return Response(page.data)
