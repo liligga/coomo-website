@@ -42,7 +42,7 @@ class MenuLink(models.Model):
         Page,
         blank=True,
         null=True,
-        on_delete=models.DO_NOTHING,
+        on_delete=models.SET_NULL,
         help_text='Укажите страницу, если ссылка должна указывать на неё',
         verbose_name='Связанная страница',
         related_name='page_link')
