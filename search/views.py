@@ -25,7 +25,6 @@ class GlobalSearchList(APIView):
             reports = Reports.objects.filter(Q(title__icontains=query))
             courses = Course.objects.filter(Q(name__icontains=query))
             # pages = Page.objects.filter(Q(title__icontains=query))
-
             return JsonResponse({'news': SearchNewsSerializer(instance=news, many=True).data,
                                  'tests': OnlineTestSearchSerializer(instance=tests, many=True).data,
                                  'reports': ReportsSearchSerializer(instance=reports, many=True).data,
