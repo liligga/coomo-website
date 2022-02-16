@@ -24,7 +24,6 @@ class Course(models.Model):
 	class Meta:
 		verbose_name = 'Курс'
 		verbose_name_plural = 'Курсы'
-		ordering = ['-id']
 
 
 class Video(models.Model):
@@ -55,4 +54,3 @@ class Video(models.Model):
 	class Meta:
 		verbose_name = 'Видео'
 		verbose_name_plural = 'Видео'
-		ordering = ['-id']
