@@ -7,7 +7,7 @@ from .serializers import *
 
 class ReportsView(APIView):
     def get(self, request):
-        reports = Reports.objects.all()
+        reports = Reports.objects.all().order_by('-id')
         serializer = ReportsSerializer(reports, many=True)
         context = {"reports": serializer.data}
         return Response(context)
