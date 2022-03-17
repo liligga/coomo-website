@@ -41,7 +41,7 @@ class OnlineTestAdmin(admin.ModelAdmin):
     fieldsets = [
         ('ОНЛАЙН ТЕСТ', {
             'fields': (
-                'name', 'part_num', 'version', 'duration', 'num_questions', 'num_answers', 'lang', 'is_active',
+                'name', 'eng_test', 'part_num', 'version', 'duration', 'num_questions', 'num_answers', 'lang', 'is_active',
                 'intro', 'excel',)
         }
          ),
