@@ -23,7 +23,7 @@ class HomeView(APIView):
         important_news = News.objects.filter(important=True, project=False).first()
         banners = News.objects.filter(banners=True, project=False, lang=lang)
         menu = MenuLink.objects.filter(is_active=True, lang=lang)
-        reports = Reports.objects.all()
+        reports = Reports.objects.all().order_by('-id')
         footer = FooterLink.objects.filter(is_active=True, lang=lang)
         serializer1 = NewsSerializer(last_eight_news, many=True)
         serializer2 = ImportantNewsSerializer(important_news)
