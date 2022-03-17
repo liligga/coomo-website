@@ -69,6 +69,11 @@ class OnlineTest(models.Model):
         default='Ru',
         choices=LANGUAGE_CHOICES,
         verbose_name='Язык теста')
+    eng_test = models.BooleanField(
+        default=False,
+        help_text='Включить только для теста по английскому языку',
+        verbose_name='Тест по английскому языку'
+    )
     is_active = models.BooleanField(default=True, verbose_name='Опубликован')
     intro = RichTextField(verbose_name='Приветственный текст')
 
