@@ -26,6 +26,7 @@ class AnswerInstanceAdmin(admin.TabularInline):
 
 @admin.register(OnlineTest)
 class OnlineTestAdmin(admin.ModelAdmin):
+    save_on_top = True
     excel = ExcelForm
     readonly_fields = ('excel',)
     list_display = [
