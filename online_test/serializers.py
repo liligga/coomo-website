@@ -32,4 +32,4 @@ class QuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = OnlineTest
         fields = ('id', 'name', 'part_num', 'version', 'duration',
-                  'num_questions', 'lang', 'first', 'questions', 'eng_test')
+                  'num_questions', 'num_answers', 'lang', 'first', 'questions', 'eng_test')
