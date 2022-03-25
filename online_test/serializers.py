@@ -5,11 +5,15 @@ from .models import OnlineTestQuestion, OnlineTest, AnswerTest
 class OnlineTestListSerializer(serializers.ModelSerializer):
     name = serializers.CharField(source='get_name_display')
     lang = serializers.CharField(source='get_lang_display')
+    first = serializers.SerializerMethodField()
+
+    def get_first(self, obj):
+        return obj.questions.first().num_start
 
     class Meta:
         model = OnlineTest
         fields = ('id', 'name', 'intro', 'part_num', 'version', 'duration',
-                  'num_questions', 'lang', 'eng_test')
+                  'num_questions', 'num_answers', 'lang', 'first', 'eng_test')
 
 
 class AnswerSerializer(serializers.ModelSerializer):
