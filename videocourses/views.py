@@ -13,8 +13,8 @@ class CourseListView(ListAPIView):
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['lang']
 
-    def get(self, request):
-        courses = self.queryset.order_by('-id').values('name', 'id', 'lang')
+    def get(self, request, *args, **kwargs):
+        courses = self.queryset.order_by('lang', '-id').values('name', 'id', 'lang')
         data = {}
         for item in courses:
             data.setdefault(item['name'], {})[item['lang']] = item
