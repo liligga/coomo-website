@@ -31,7 +31,7 @@ class QuestionSerializer(serializers.ModelSerializer):
         return obj.questions.first().num_start
 
     def get_questions(self, obj):
-        return obj.questions.all().values('question', 'num_start', 'num_end')
+        return obj.questions.all().order_by('num_start').values('question', 'num_start', 'num_end')
 
     class Meta:
         model = OnlineTest
