@@ -10,11 +10,26 @@ class QuestionInstanceAdmin(admin.TabularInline):
     readonly_fields = ["get_image"]
 
     def get_image(self, obj):
-        return mark_safe(f'<img src={obj.question.url} width="200" height="300"')
+        return mark_safe(
+            f'<img src={obj.question.url} width="200" height="300"'
+        )
 
     get_image.short_description = "Изображение"
     fieldsets = (
-        (None, {"fields": (("num_start", "num_end", "question", "get_image"),)}),
+        (
+            None,
+            {
+                "fields": (
+                    (
+                        "num_start",
+                        "num_end",
+                        "question",
+                        "question_image",
+                        "get_image",
+                    ),
+                )
+            },
+        ),
     )
 
 
