@@ -1,8 +1,9 @@
-from django.contrib import admin
 import pandas as pd
-from .forms import ExcelForm, AnswerFormAdmin
-from .models import OnlineTestQuestion, AnswerTest, OnlineTest
+from django.contrib import admin
 from django.utils.safestring import mark_safe
+
+from .forms import AnswerFormAdmin, ExcelForm
+from .models import AnswerTest, OnlineTest, OnlineTestQuestion
 
 
 class QuestionInstanceAdmin(admin.TabularInline):
@@ -50,8 +51,11 @@ class OnlineTestAdmin(admin.ModelAdmin):
         "version",
         "lang",
         "is_active",
+        "order_number",
     ]
     list_display_links = ["id", "name"]
+    list_editable = ["order_number"]
+    list_filter = ["is_active", "lang"]
     inlines = [QuestionInstanceAdmin, AnswerInstanceAdmin]
     fieldsets = [
         (

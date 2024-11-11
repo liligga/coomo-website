@@ -1,5 +1,5 @@
-from django.db import models
 from ckeditor.fields import RichTextField
+from django.db import models
 
 LANGUAGE_CHOICES = [
     (None, "Выберите язык"),
@@ -89,10 +89,15 @@ class OnlineTest(models.Model):
     )
     is_active = models.BooleanField(default=True, verbose_name="Опубликован")
     intro = RichTextField(verbose_name="Приветственный текст")
+    order_number = models.PositiveIntegerField(
+        verbose_name="Порядковый номер",
+        default=1,
+    )
 
     class Meta:
         verbose_name = "Онлайн тест"
         verbose_name_plural = "Онлайн тесты"
+        ordering = ["order_number"]
 
     def __str__(self):
         return self.get_name_display()

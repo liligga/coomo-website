@@ -8,10 +8,10 @@ from .serializers import OnlineTestListSerializer, QuestionSerializer
 
 
 class OnlineTestViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = OnlineTest.objects.all()
+    queryset = OnlineTest.objects.filter(is_active=True)
     serializer_class = OnlineTestListSerializer
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['name', 'lang']
+    filterset_fields = ["name", "lang"]
 
 
 class TestQuestionsView(APIView):
@@ -29,4 +29,4 @@ class CheckTestAnswersView(APIView):
         test = OnlineTestListSerializer(online_test)
         answers = online_test.answers.all()
         data = {a.question_number: a.correct_answer for a in answers}
-        return Response({'test': test.data, 'answers': data})
+        return Response({"test": test.data, "answers": data})
