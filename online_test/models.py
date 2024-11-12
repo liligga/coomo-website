@@ -25,6 +25,7 @@ SCHOOL_SUBJECTS = [
             ("Chemistry_ru", "Химия"),
             ("Math_subj_ru", "Математика предметная"),
             ("English_ru", "Английский язык"),
+            ("Language_ru", "Русский язык и литература"),
         ),
     ),
     (
@@ -43,6 +44,7 @@ SCHOOL_SUBJECTS = [
             ("Chemistry_kg", "Химия"),
             ("Math_subj_kg", "Математика предметная"),
             ("English_kg", "Англис тили"),
+            ("Language_kg", "Кыргыз тили жана адабияты"),
         ),
     ),
 ]
