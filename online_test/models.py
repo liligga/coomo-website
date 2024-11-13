@@ -45,6 +45,7 @@ SCHOOL_SUBJECTS = [
             ("Math_subj_kg", "Математика предметная"),
             ("English_kg", "Англис тили"),
             ("Language_kg", "Кыргыз тили жана адабияты"),
+            ("Official_language_kg", "Мамлекеттик тил боюнча тест"),
         ),
     ),
 ]
